@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Seoul 26 — Nachtroute</title>
-  <meta name="description" content="Seoul 26 · Reisetagebuch · 5.–17. Oktober 2026.">
+  <title>Seoul 26 — Route</title>
+  <meta name="description" content="Seoul 26 · Route · 5.–17. Oktober 2026.">
   <meta name="theme-color" content="#0a0a0c">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Seoul 26 — Nachtroute">
-  <meta property="og:description" content="Reisetagebuch · Zürich → München → Seoul · 5.–17. Oktober 2026.">
+  <meta property="og:title" content="Seoul 26 — Route">
+  <meta property="og:description" content="Route · Zürich → München → Seoul · 5.–17. Oktober 2026.">
   <meta property="og:url" content="https://yelggy.github.io/seoul26/">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Seoul 26 — Nachtroute">
-  <meta name="twitter:description" content="Reisetagebuch · Zürich → München → Seoul · 5.–17. Oktober 2026.">
+  <meta name="twitter:title" content="Seoul 26 — Route">
+  <meta name="twitter:description" content="Route · Zürich → München → Seoul · 5.–17. Oktober 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -24,23 +24,19 @@
       <p class="hero-kicker">Nachtroute</p>
       <h1>Seoul 26</h1>
       <p class="hero-sub" id="trip-dates">5.–17. Oktober 2026</p>
+      <nav class="tabs" aria-label="Seiten">
+        <a href="./" aria-current="page">Route</a>
+        <a href="./wunschliste.html">Wunschliste</a>
+      </nav>
+    </header>
+
     <div class="legend" aria-hidden="true">
       <span><i class="dot dot-flight"></i> Flug</span>
       <span><i class="dot dot-stay"></i> Aufenthalt</span>
       <span><i class="dot dot-car"></i> Auto</span>
-      <span><i class="dot dot-bucket"></i> Wunschliste</span>
     </div>
 
     <ol class="route" id="route" aria-label="Routenstopps"></ol>
-
-    <section class="bucket" id="bucket" aria-labelledby="bucket-title">
-      <header class="bucket-head">
-        <p class="hero-kicker">Wunschliste</p>
-        <h2 id="bucket-title">Wunschliste</h2>
-        <p class="bucket-lead">Eigener Bereich. Die Einträge kommen aus den Dateien <code>bucket/*.json</code> im Repository. Eine neue Datei erscheint nach dem nächsten Seiten-Build. Einträge, die wie Passwörter oder Secrets aussehen, werden übersprungen.</p>
-      </header>
-      <ul class="bucket-list" id="bucket-list" aria-label="Wunschliste aus dem Repository"></ul>
-    </section>
 
     <footer class="footer">
       <p>Seoul 26</p>
@@ -48,46 +44,17 @@
     </footer>
   </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
   <script>
 (function () {
   "use strict";
-
   var KIND_LABELS = { flight: "Flug", stay: "Aufenthalt", car: "Auto", bucket: "Wunschliste" };
-  var SECRET_PATTERNS = [
-    /\b(pass(word|wort)|kennwort|passwd|pwd)\s*[:=]/i,
-    /\b(api[_-]?key|secret[_-]?key|access[_-]?token|private[_-]?key|client[_-]?secret|authorization)\b/i,
-    /\b(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk_(live|test)_[A-Za-z0-9]{10,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,})/,
-    /-----BEGIN [A-Z0-9 ]+PRIVATE KEY-----/,
-    /\bBearer\s+[A-Za-z0-9\-._~+/]+=*/
-  ];
   var routeEl = document.getElementById("route");
   var datesEl = document.getElementById("trip-dates");
-  var bucketList = document.getElementById("bucket-list");
-  var toastEl = document.getElementById("toast");
-
   try {
     ["seoul26-places-v1", "seoul26-places-v2", "seoul26-places-v3", "seoul26-bucket-v1"].forEach(function (key) {
       localStorage.removeItem(key);
     });
   } catch (e) {}
-
-  function toast(msg) {
-    toastEl.textContent = msg;
-    toastEl.classList.add("is-show");
-    setTimeout(function () { toastEl.classList.remove("is-show"); }, 2200);
-  }
-
-  function looksSensitive(text) {
-    var s = String(text || "");
-    if (!s) return false;
-    for (var i = 0; i < SECRET_PATTERNS.length; i++) {
-      if (SECRET_PATTERNS[i].test(s)) return true;
-    }
-    var digits = s.replace(/\D/g, "");
-    return digits.length >= 13 && digits.length <= 19 && /\d(?:[ -]?\d){12,18}/.test(s);
-  }
 
   function renderRoute(places) {
     routeEl.innerHTML = "";
@@ -142,46 +109,7 @@
     });
   }
 
-  function renderBucket(items) {
-    bucketList.innerHTML = "";
-    if (!items.length) {
-      var empty = document.createElement("li");
-      empty.className = "bucket-empty";
-      empty.textContent = "Noch keine Wünsche in der Liste.";
-      bucketList.appendChild(empty);
-      return;
-    }
-    items.forEach(function (item) {
-      var li = document.createElement("li");
-      li.className = "bucket-item";
-      var body = document.createElement("div");
-      var title = document.createElement("h3");
-      title.textContent = item.name;
-      body.appendChild(title);
-      if (item.when) {
-        var when = document.createElement("p");
-        when.textContent = item.when;
-        body.appendChild(when);
-      }
-      if (item.note) {
-        var note = document.createElement("p");
-        note.textContent = item.note;
-        body.appendChild(note);
-      }
-      if (item.maps && /^https?:\/\//i.test(item.maps)) {
-        var a = document.createElement("a");
-        a.href = item.maps;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.textContent = "Karte";
-        body.appendChild(a);
-      }
-      li.appendChild(body);
-      bucketList.appendChild(li);
-    });
-  }
-
-  fetch("./places.json?v=4")
+  fetch("./places.json?v=5")
     .then(function (r) { if (!r.ok) throw new Error("fail"); return r.json(); })
     .then(function (data) {
       if (data.trip && data.trip.dates) datesEl.textContent = data.trip.dates;
@@ -189,40 +117,6 @@
     })
     .catch(function () {
       routeEl.innerHTML = '<p class="empty">Die Route konnte nicht geladen werden.</p>';
-    });
-
-  fetch("https://api.github.com/repos/yelggy/seoul26/contents/bucket", { headers: { Accept: "application/vnd.github+json" } })
-    .then(function (r) { if (!r.ok) throw new Error("list"); return r.json(); })
-    .then(function (files) {
-      var jsonFiles = (files || []).filter(function (f) { return f && f.type === "file" && /\.json$/i.test(f.name); });
-      return Promise.all(jsonFiles.map(function (f) {
-        return fetch(f.download_url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
-      }));
-    })
-    .then(function (docs) {
-      var items = [];
-      var skipped = 0;
-      (docs || []).forEach(function (doc) {
-        if (!doc || typeof doc !== "object") return;
-        var item = {
-          name: String(doc.name || "").trim(),
-          when: String(doc.when || "").trim(),
-          note: String(doc.note || "").trim(),
-          maps: String(doc.maps || "").trim()
-        };
-        if (!item.name) return;
-        if (looksSensitive(item.name) || looksSensitive(item.when) || looksSensitive(item.note) || looksSensitive(item.maps)) {
-          skipped += 1;
-          return;
-        }
-        items.push(item);
-      });
-      items.sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
-      renderBucket(items);
-      if (skipped) toast("Übersprungen: " + skipped + " sensible Datei" + (skipped === 1 ? "" : "en"));
-    })
-    .catch(function () {
-      bucketList.innerHTML = '<li class="bucket-empty">Die Wunschliste konnte nicht geladen werden.</li>';
     });
 })();
   </script>

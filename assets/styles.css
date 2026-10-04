@@ -77,6 +77,30 @@ body {
   margin: 0 auto;
 }
 
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.15rem;
+}
+
+.tabs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tabs a[aria-current="page"] {
+  color: var(--paper-ink);
+  background: var(--paper);
+  border-color: transparent;
+}
+
 /* —— Header —— */
 .hero {
   text-align: center;

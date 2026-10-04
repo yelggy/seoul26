@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seoul 26 — Wunschliste</title>
+  <meta name="description" content="Seoul 26 · Wunschliste · 5.–17. Oktober 2026.">
+  <meta name="theme-color" content="#0a0a0c">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Seoul 26 — Wunschliste">
+  <meta property="og:description" content="Wunschliste · Seoul 26 · 5.–17. Oktober 2026.">
+  <meta property="og:url" content="https://yelggy.github.io/seoul26/wunschliste.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Seoul 26 — Wunschliste">
+  <meta name="twitter:description" content="Wunschliste · Seoul 26 · 5.–17. Oktober 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="hero-kicker">Wunschliste</p>
+      <h1>Seoul 26</h1>
+      <p class="hero-sub">5.–17. Oktober 2026</p>
+      <nav class="tabs" aria-label="Seiten">
+        <a href="./">Route</a>
+        <a href="./wunschliste.html" aria-current="page">Wunschliste</a>
+      </nav>
+    </header>
+
+    <section class="bucket" id="bucket" aria-labelledby="bucket-title">
+      <header class="bucket-head">
+        <h2 id="bucket-title">Wunschliste</h2>
+        <p class="bucket-lead">Die Einträge kommen aus den Dateien <code>bucket/*.json</code> im Repository. Eine neue Datei erscheint nach dem nächsten Seiten-Build. Einträge, die wie Passwörter oder Secrets aussehen, werden übersprungen.</p>
+      </header>
+      <ul class="bucket-list" id="bucket-list" aria-label="Wunschliste aus dem Repository"></ul>
+    </section>
+
+    <footer class="footer">
+      <p>Seoul 26</p>
+      <p><a href="https://github.com/yelggy/seoul26" target="_blank" rel="noopener noreferrer">GitHub-Repository</a></p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+(function () {
+  "use strict";
+  var SECRET_PATTERNS = [
+    /\b(pass(word|wort)|kennwort|passwd|pwd)\s*[:=]/i,
+    /\b(api[_-]?key|secret[_-]?key|access[_-]?token|private[_-]?key|client[_-]?secret|authorization)\b/i,
+    /\b(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk_(live|test)_[A-Za-z0-9]{10,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,})/,
+    /-----BEGIN [A-Z0-9 ]+PRIVATE KEY-----/,
+    /\bBearer\s+[A-Za-z0-9\-._~+/]+=*/
+  ];
+  var bucketList = document.getElementById("bucket-list");
+  var toastEl = document.getElementById("toast");
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("is-show");
+    setTimeout(function () { toastEl.classList.remove("is-show"); }, 2200);
+  }
+
+  function looksSensitive(text) {
+    var s = String(text || "");
+    if (!s) return false;
+    for (var i = 0; i < SECRET_PATTERNS.length; i++) {
+      if (SECRET_PATTERNS[i].test(s)) return true;
+    }
+    var digits = s.replace(/\D/g, "");
+    return digits.length >= 13 && digits.length <= 19 && /\d(?:[ -]?\d){12,18}/.test(s);
+  }
+
+  function renderBucket(items) {
+    bucketList.innerHTML = "";
+    if (!items.length) {
+      var empty = document.createElement("li");
+      empty.className = "bucket-empty";
+      empty.textContent = "Noch keine Wünsche in der Liste.";
+      bucketList.appendChild(empty);
+      return;
+    }
+    items.forEach(function (item) {
+      var li = document.createElement("li");
+      li.className = "bucket-item";
+      var body = document.createElement("div");
+      var title = document.createElement("h3");
+      title.textContent = item.name;
+      body.appendChild(title);
+      if (item.when) {
+        var when = document.createElement("p");
+        when.textContent = item.when;
+        body.appendChild(when);
+      }
+      if (item.note) {
+        var note = document.createElement("p");
+        note.textContent = item.note;
+        body.appendChild(note);
+      }
+      if (item.maps && /^https?:\/\//i.test(item.maps)) {
+        var a = document.createElement("a");
+        a.href = item.maps;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "Karte";
+        body.appendChild(a);
+      }
+      li.appendChild(body);
+      bucketList.appendChild(li);
+    });
+  }
+
+  fetch("https://api.github.com/repos/yelggy/seoul26/contents/bucket", { headers: { Accept: "application/vnd.github+json" } })
+    .then(function (r) { if (!r.ok) throw new Error("list"); return r.json(); })
+    .then(function (files) {
+      var jsonFiles = (files || []).filter(function (f) { return f && f.type === "file" && /\.json$/i.test(f.name); });
+      return Promise.all(jsonFiles.map(function (f) {
+        return fetch(f.download_url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+      }));
+    })
+    .then(function (docs) {
+      var items = [];
+      var skipped = 0;
+      (docs || []).forEach(function (doc) {
+        if (!doc || typeof doc !== "object") return;
+        var item = {
+          name: String(doc.name || "").trim(),
+          when: String(doc.when || "").trim(),
+          note: String(doc.note || "").trim(),
+          maps: String(doc.maps || "").trim()
+        };
+        if (!item.name) return;
+        if (looksSensitive(item.name) || looksSensitive(item.when) || looksSensitive(item.note) || looksSensitive(item.maps)) {
+          skipped += 1;
+          return;
+        }
+        items.push(item);
+      });
+      items.sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
+      renderBucket(items);
+      if (skipped) toast("Übersprungen: " + skipped + " sensible Datei" + (skipped === 1 ? "" : "en"));
+    })
+    .catch(function () {
+      bucketList.innerHTML = '<li class="bucket-empty">Die Wunschliste konnte nicht geladen werden.</li>';
+    });
+})();
+  </script>
+</body>
+</html>
