@@ -998,3 +998,101 @@ body.is-editing .add-card {
   font-size: 0.9rem;
   margin-top: 0.75rem;
 }
+
+.bucket-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.35rem 0 0.9rem;
+}
+
+.bucket-filter-btn {
+  appearance: none;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #d6d0c6;
+  background: #16161b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 0.32rem 0.75rem;
+  cursor: pointer;
+}
+
+.bucket-filter-btn:hover {
+  color: var(--text);
+}
+
+.bucket-filter-btn.is-on {
+  color: #1c1917;
+  background: #f3ede3;
+}
+
+.bucket-filter-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.bucket-entry-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.bucket-from {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1c1917;
+  background: #fbbf24;
+  border-radius: 999px;
+  padding: 0.12rem 0.45rem;
+  line-height: 1.2;
+}
+
+.leaflet-tooltip.marker-label {
+  background: #f3ede3;
+  color: #1c1917;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  padding: 0.12rem 0.48rem;
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.leaflet-tooltip.marker-label::before {
+  display: none;
+}
+
+.map-pop {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 8rem;
+}
+
+.map-pop strong {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.map-pop-from {
+  justify-self: start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #1c1917;
+  background: #fbbf24;
+  border-radius: 999px;
+  padding: 0.08rem 0.4rem;
+}
+
+.map-pop a {
+  font-weight: 700;
+  color: #1c1917;
+}

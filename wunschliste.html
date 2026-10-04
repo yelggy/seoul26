@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/styles.css?v=8">
+  <link rel="stylesheet" href="./assets/styles.css?v=9">
 </head>
 <body>
   <main class="wrap">
@@ -36,6 +36,10 @@
         <header class="bucket-head">
           <h2 id="bucket-title" tabindex="-1">Bucketlist</h2>
         </header>
+        <div class="bucket-filter" role="group" aria-label="Bucketlist filtern">
+          <button type="button" class="bucket-filter-btn is-on" data-filter="all" aria-pressed="true">Alle</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Cyrill" aria-pressed="false">Cyrill</button>
+        </div>
         <ul class="bucket-entries" id="bucket-list"></ul>
       </div>
 
@@ -84,6 +88,7 @@
   var detailMapWrap = document.getElementById("detail-map-wrap");
   var detailMap = document.getElementById("detail-map");
   var items = [];
+  var filter = "all";
 
   function toast(msg) {
     toastEl.textContent = msg;
@@ -192,25 +197,42 @@
     if (found) showDetail(found, true);
   }
 
+  function visibleItems(list) {
+    if (filter === "Cyrill") {
+      return list.filter(function (item) { return item.from === "Cyrill"; });
+    }
+    return list.slice();
+  }
+
   function renderBucket(list) {
     listEl.innerHTML = "";
-    if (!list.length) {
+    var shown = visibleItems(list);
+    if (!shown.length) {
       var empty = document.createElement("li");
       empty.className = "bucket-empty";
-      empty.textContent = "Noch keine Wünsche in der Liste.";
+      empty.textContent = filter === "Cyrill" ? "Keine Orte von Cyrill." : "Noch keine Wünsche in der Liste.";
       listEl.appendChild(empty);
       return;
     }
-    list.sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
-    list.forEach(function (item) {
+    shown.sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
+    shown.forEach(function (item) {
       var li = document.createElement("li");
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "bucket-entry";
+      var top = document.createElement("span");
+      top.className = "bucket-entry-top";
       var name = document.createElement("span");
       name.className = "bucket-entry-name";
       name.textContent = item.name;
-      btn.appendChild(name);
+      top.appendChild(name);
+      if (item.from === "Cyrill") {
+        var tag = document.createElement("span");
+        tag.className = "bucket-from";
+        tag.textContent = "Cyrill";
+        top.appendChild(tag);
+      }
+      btn.appendChild(top);
       if (item.note) {
         var note = document.createElement("span");
         note.className = "bucket-entry-note";
@@ -224,6 +246,17 @@
   }
 
   document.getElementById("bucket-back").addEventListener("click", showList);
+  document.querySelectorAll(".bucket-filter-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filter = btn.getAttribute("data-filter") || "all";
+      document.querySelectorAll(".bucket-filter-btn").forEach(function (other) {
+        var on = other === btn;
+        other.classList.toggle("is-on", on);
+        other.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      renderBucket(items);
+    });
+  });
   window.addEventListener("hashchange", openFromHash);
   detailName.tabIndex = -1;
 
@@ -251,10 +284,11 @@
           note: String(doc.note || "").trim(),
           maps: String(doc.maps || "").trim(),
           photos: String(doc.photos || "").trim(),
-          images: images
+          images: images,
+          from: String(doc.from || "").trim()
         };
         if (!item.name || !item.id) return;
-        var blob = [item.name, item.when, item.note, item.maps, item.photos].concat(images).join("\n");
+        var blob = [item.name, item.when, item.note, item.maps, item.photos, item.from].concat(images).join("\n");
         if (looksSensitive(blob)) {
           skipped += 1;
           return;
