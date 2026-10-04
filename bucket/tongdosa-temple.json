@@ -1,8 +1,15 @@
 {
   "name": "Tongdosa Temple (통도사)",
-  "city": "Korea",
+  "city": "Yangsan",
   "when": "Bucketlist",
-  "note": "UNESCO Heritage Site. Day trip from Busan.",
+  "note": "Der große Tempel Tongdosa, ein UNESCO-Welterbe, in der Story als Tagesausflug ab Busan genannt.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Tongdosa+Temple+%ED%86%B5%EB%8F%84%EC%82%AC",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Tongdosa+Temple+%ED%86%B5%EB%8F%84%EC%82%AC"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Tongdosa+Temple+%ED%86%B5%EB%8F%84%EC%82%AC",
+  "lat": 35.48786,
+  "lng": 129.06429,
+  "images": [
+    "assets/places/tongdosa-temple/1.jpg",
+    "assets/places/tongdosa-temple/2.jpg",
+    "assets/places/tongdosa-temple/3.jpg"
+  ]
 }

@@ -2,7 +2,14 @@
   "name": "Hwanho Park Space Walk",
   "city": "Pohang",
   "when": "Bucketlist",
-  "note": "Hwanho Park, Pohang. Winding track high above the ground, views of the coastline and cityscape.",
+  "note": "Die geschwungene, begehbare Treppe im Hwanho Park in Pohang, hoch über dem Boden, mit Blick auf Küste und Stadt.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Hwanho+Park+Space+Walk+Pohang",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Hwanho+Park+Space+Walk+Pohang"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Hwanho+Park+Space+Walk+Pohang",
+  "lat": 36.065109,
+  "lng": 129.39044,
+  "images": [
+    "assets/places/hwanho-park-space-walk/1.jpg",
+    "assets/places/hwanho-park-space-walk/2.jpg",
+    "assets/places/hwanho-park-space-walk/3.jpg"
+  ]
 }

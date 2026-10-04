@@ -2,7 +2,14 @@
   "name": "Starfield Library Suwon",
   "city": "Suwon",
   "when": "Bucketlist",
-  "note": "",
+  "note": "Die hohe Bibliothek im Starfield Suwon, mit Bücherregalen über mehrere Geschosse.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Starfield+Library+Suwon",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Starfield+Library+Suwon"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Starfield+Library+Suwon",
+  "lat": 37.287506,
+  "lng": 126.99168,
+  "images": [
+    "assets/places/starfield-library-suwon/1.jpg",
+    "assets/places/starfield-library-suwon/2.jpg",
+    "assets/places/starfield-library-suwon/3.jpg"
+  ]
 }

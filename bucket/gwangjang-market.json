@@ -2,7 +2,14 @@
   "name": "Gwangjang Market",
   "city": "Seoul",
   "when": "Bucketlist",
-  "note": "Covered market with food stalls.",
+  "note": "Eine lebhafte Markthalle in Jongno, voller Stände und herzhafter Spezialitäten.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Gwangjang+Market+Seoul",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Gwangjang+Market+Seoul"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Gwangjang+Market+Seoul",
+  "lat": 37.569783,
+  "lng": 127.000655,
+  "images": [
+    "assets/places/gwangjang-market/1.jpg",
+    "assets/places/gwangjang-market/2.jpg",
+    "assets/places/gwangjang-market/3.jpg"
+  ]
 }

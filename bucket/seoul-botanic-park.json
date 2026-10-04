@@ -2,7 +2,14 @@
   "name": "Seoul Botanic Park",
   "city": "Seoul",
   "when": "Bucketlist",
-  "note": "Greenhouse, Open Forest, Theme Garden, Lake Garden and Wetlands Garden.",
+  "note": "Ein weiter Park in Gangseo mit Gewächshaus, offenem Wald, Themengarten, See und Feuchtgebiet.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Seoul+Botanic+Park+Seoul",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Seoul+Botanic+Park+Seoul"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Seoul+Botanic+Park+Seoul",
+  "lat": 37.571066,
+  "lng": 126.834664,
+  "images": [
+    "assets/places/seoul-botanic-park/1.jpg",
+    "assets/places/seoul-botanic-park/2.jpg",
+    "assets/places/seoul-botanic-park/3.jpg"
+  ]
 }

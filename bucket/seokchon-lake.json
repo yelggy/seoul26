@@ -2,7 +2,14 @@
   "name": "Seokchon Lake",
   "city": "Seoul",
   "when": "Bucketlist",
-  "note": "",
+  "note": "Der See mitten in Jamsil, schön zum Spazieren, abends mit der Stadt im Hintergrund.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Seokchon+Lake+Seoul",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Seokchon+Lake+Seoul"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Seokchon+Lake+Seoul",
+  "lat": 37.510088,
+  "lng": 127.104078,
+  "images": [
+    "assets/places/seokchon-lake/1.jpg",
+    "assets/places/seokchon-lake/2.jpg",
+    "assets/places/seokchon-lake/3.jpg"
+  ]
 }

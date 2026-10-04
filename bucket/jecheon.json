@@ -2,7 +2,14 @@
   "name": "Jecheon",
   "city": "Jecheon",
   "when": "Bucketlist",
-  "note": "View over mountains and a reservoir.",
+  "note": "Eine weite Aussicht bei Jecheon über bewaldete Berge und einen Stausee.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Jecheon",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Jecheon"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Jecheon",
+  "lat": 37.132604,
+  "lng": 128.191351,
+  "images": [
+    "assets/places/jecheon/1.jpg",
+    "assets/places/jecheon/2.jpg",
+    "assets/places/jecheon/3.jpg"
+  ]
 }

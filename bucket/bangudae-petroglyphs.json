@@ -2,7 +2,14 @@
   "name": "Bangudae Petroglyphs (울주 대곡리 반구대 암각화)",
   "city": "Ulsan",
   "when": "Bucketlist",
-  "note": "UNESCO Heritage Site.",
+  "note": "Die prähistorischen Felsbilder von Bangudae in Ulju, ein UNESCO-Welterbe.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Bangudae+Petroglyphs+%EC%9A%B8%EC%A3%BC+%EB%8C%80%EA%B3%A1%EB%A6%AC+%EB%B0%98%EA%B5%AC%EB%8C%80+%EC%95%94%EA%B0%81%ED%99%94",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Bangudae+Petroglyphs+%EC%9A%B8%EC%A3%BC+%EB%8C%80%EA%B3%A1%EB%A6%AC+%EB%B0%98%EA%B5%AC%EB%8C%80+%EC%95%94%EA%B0%81%ED%99%94"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Bangudae+Petroglyphs+%EC%9A%B8%EC%A3%BC+%EB%8C%80%EA%B3%A1%EB%A6%AC+%EB%B0%98%EA%B5%AC%EB%8C%80+%EC%95%94%EA%B0%81%ED%99%94",
+  "lat": 35.603876,
+  "lng": 129.177804,
+  "images": [
+    "assets/places/bangudae-petroglyphs/1.jpg",
+    "assets/places/bangudae-petroglyphs/2.jpg",
+    "assets/places/bangudae-petroglyphs/3.jpg"
+  ]
 }

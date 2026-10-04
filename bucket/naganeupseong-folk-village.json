@@ -2,7 +2,12 @@
   "name": "Naganeupseong Folk Village",
   "city": "Suncheon",
   "when": "Bucketlist",
-  "note": "600 year old walled village, Suncheon near Yeosu.",
+  "note": "Ein rund 600 Jahre altes, ummauertes Dorf bei Suncheon, nahe Yeosu, in dem heute noch Menschen wohnen.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Naganeupseong+Folk+Village+Suncheon+Yeosu",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Naganeupseong+Folk+Village+Suncheon+Yeosu"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Naganeupseong+Folk+Village+Suncheon+Yeosu",
+  "images": [
+    "assets/places/naganeupseong-folk-village/1.jpg",
+    "assets/places/naganeupseong-folk-village/2.jpg",
+    "assets/places/naganeupseong-folk-village/3.jpg"
+  ]
 }

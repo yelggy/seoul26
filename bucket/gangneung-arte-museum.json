@@ -2,7 +2,10 @@
   "name": "Gangneung Arte Museum",
   "city": "Gangneung",
   "when": "Bucketlist",
-  "note": "",
+  "note": "Ein immersives Lichtkunst-Museum in Gangneung, unter anderem mit einem großen Wellenraum.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Gangneung+Arte+Museum",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Gangneung+Arte+Museum"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Gangneung+Arte+Museum",
+  "lat": 37.791605,
+  "lng": 128.907385,
+  "images": []
 }

@@ -2,7 +2,10 @@
   "name": "Cheongsudang Bakery",
   "city": "Seoul",
   "when": "Bucketlist",
-  "note": "31-9 Donhwamun-ro 11na-gil, Jongno-gu, Seoul. Ikseon-dong. Stone path with bamboo and lanterns.",
+  "note": "Ein schönes Café in Ikseon-dong, Jongno, mit Steinweg, Bambus und Laternen. 31-9 Donhwamun-ro 11na-gil. Dazu besondere Desserts, etwa der Black-Sesame-Fromage-Kuchen.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Cheongsudang+Bakery+31-9+Donhwamun-ro+11na-gil+Jongno-gu+Seoul",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Cheongsudang+Bakery+31-9+Donhwamun-ro+11na-gil+Jongno-gu+Seoul"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Cheongsudang+Bakery+31-9+Donhwamun-ro+11na-gil+Jongno-gu+Seoul",
+  "lat": 37.573627,
+  "lng": 126.990542,
+  "images": []
 }

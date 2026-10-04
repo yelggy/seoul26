@@ -2,7 +2,10 @@
   "name": "Antique Coffee (Jamsil, Songpa)",
   "city": "Seoul",
   "when": "Bucketlist",
-  "note": "Baekjegobunru 41gil 21-16 Jamil, Songpa-gu, Seoul. Flower and European themed cafe. Specialty coffee Dirty and Cream.",
+  "note": "Ein blumiges, europäisch eingerichtetes Café in Jamsil, Songpa, mit Kuchen und dem Kaffee Dirty and Cream. Baekjegobunru 41gil 21-16, Songpa-gu, Seoul.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Antique+Coffee+Baekjegobunru+41gil+21-16+Jamil+Songpa-gu+Seoul",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Antique+Coffee+Baekjegobunru+41gil+21-16+Jamil+Songpa-gu+Seoul"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Antique+Coffee+Baekjegobunru+41gil+21-16+Jamil+Songpa-gu+Seoul",
+  "lat": 37.507585,
+  "lng": 127.106397,
+  "images": []
 }

@@ -2,7 +2,14 @@
   "name": "Haebangchon",
   "city": "Seoul",
   "when": "Bucketlist",
-  "note": "",
+  "note": "Ein steiles Viertel in Yongsan mit engen Gassen, kleinen Läden und Blick über Seoul.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Haebangchon+Seoul",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Haebangchon+Seoul"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Haebangchon+Seoul",
+  "lat": 37.543539,
+  "lng": 126.985594,
+  "images": [
+    "assets/places/haebangchon/1.jpg",
+    "assets/places/haebangchon/2.jpg",
+    "assets/places/haebangchon/3.jpg"
+  ]
 }

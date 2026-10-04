@@ -2,7 +2,14 @@
   "name": "Lotte World",
   "city": "Seoul",
   "when": "Bucketlist",
-  "note": "",
+  "note": "Der große Freizeitpark in Jamsil, mit Bahnen drinnen und draußen.",
   "maps": "https://www.google.com/maps/search/?api=1&query=Lotte+World+Seoul",
-  "photos": "https://www.google.com/maps/search/?api=1&query=Lotte+World+Seoul"
+  "photos": "https://www.google.com/maps/search/?api=1&query=Lotte+World+Seoul",
+  "lat": 37.511077,
+  "lng": 127.098191,
+  "images": [
+    "assets/places/lotte-world/1.jpg",
+    "assets/places/lotte-world/2.jpg",
+    "assets/places/lotte-world/3.jpg"
+  ]
 }
