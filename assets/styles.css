@@ -677,3 +677,74 @@ body.is-editing .add-card {
     transform: none;
   }
 }
+
+/* —— Visitor bucket list —— */
+.bucket {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.bucket-head h2 {
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  margin: 0.2rem 0 0.4rem;
+}
+
+.bucket-lead {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 1rem;
+}
+
+.bucket-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bucket-list {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.bucket-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--paper);
+  color: var(--paper-ink);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+}
+
+.bucket-item h3 {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 560;
+}
+
+.bucket-item p {
+  color: var(--paper-muted);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.bucket-item a {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: var(--spine);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.bucket-empty {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
