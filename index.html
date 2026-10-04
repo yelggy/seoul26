@@ -270,7 +270,7 @@
       if (place.done) {
         var doneBadge = document.createElement("span");
         doneBadge.className = "badge badge-done";
-        doneBadge.textContent = "Done";
+        doneBadge.textContent = "Erledigt";
         badges.appendChild(doneBadge);
       }
 
@@ -418,12 +418,12 @@
   });
 
   document.getElementById("btn-reset").addEventListener("click", function () {
-    if (!confirm("Auf Vorlage zurücksetzen from places.json? Local edits will be cleared.")) return;
+    if (!confirm("Auf die Vorlage aus places.json zurücksetzen? Lokale Änderungen gehen verloren.")) return;
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
     applyData(JSON.parse(JSON.stringify(state.seed)));
-    toast("Auf Vorlage zurücksetzen");
+    toast("Auf die Vorlage zurückgesetzt");
   });
 
   document.getElementById("btn-download").addEventListener("click", function () {
