@@ -24,19 +24,6 @@
       <p class="hero-kicker">Nachtroute</p>
       <h1>Seoul 26</h1>
       <p class="hero-sub" id="trip-dates">5.–17. Oktober 2026</p>
-      <div class="toolbar">
-        <button type="button" class="btn btn-primary" id="btn-edit" aria-pressed="false">Bearbeiten</button>
-        <button type="button" class="btn btn-ghost" id="btn-download" title="Aktuelle Liste herunterladen">Liste herunterladen</button>
-      </div>
-      <div class="edit-panel" id="edit-panel" hidden>
-        <p>Änderungen bleiben in diesem Browser. Die Vorlage liegt in <code>places.json</code>. Passwörter, Zugangsdaten und Kartennummern werden blockiert und nicht gespeichert.</p>
-        <div class="edit-actions">
-          <button type="button" class="btn btn-sm" id="btn-add">+ Stopp hinzufügen</button>
-          <button type="button" class="btn btn-sm btn-danger" id="btn-reset">Auf Vorlage zurücksetzen</button>
-        </div>
-      </div>
-    </header>
-
     <div class="legend" aria-hidden="true">
       <span><i class="dot dot-flight"></i> Flug</span>
       <span><i class="dot dot-stay"></i> Aufenthalt</span>
@@ -45,44 +32,6 @@
     </div>
 
     <ol class="route" id="route" aria-label="Routenstopps"></ol>
-
-    <section class="add-card" id="add-card" aria-label="Stopp hinzufügen">
-      <div class="card">
-        <h2>Neuer Stopp</h2>
-        <form class="form-grid" id="add-form">
-          <div class="form-row">
-            <label for="add-name">Name</label>
-            <input id="add-name" name="name" required maxlength="120" placeholder="Name des Orts">
-          </div>
-          <div class="form-row">
-            <label for="add-when">Wann</label>
-            <input id="add-when" name="when" maxlength="160" placeholder="z. B. Sa 10. Okt. · 11:00">
-          </div>
-          <div class="form-row">
-            <label for="add-note">Notiz</label>
-            <textarea id="add-note" name="note" maxlength="500" placeholder="Optionale Notiz"></textarea>
-          </div>
-          <div class="form-row">
-            <label for="add-kind">Art</label>
-            <select id="add-kind" name="kind">
-              <option value="flight">Flug</option>
-              <option value="stay">Aufenthalt</option>
-              <option value="car">Auto</option>
-              <option value="bucket">Wunschliste</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="add-maps">Kartenlink</label>
-            <input id="add-maps" name="maps" type="url" maxlength="500" placeholder="https://…">
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-sm btn-primary">Stopp speichern</button>
-            <button type="button" class="btn btn-sm" id="btn-cancel-add">Abbrechen</button>
-          </div>
-        </form>
-      </div>
-    </section>
-
 
     <section class="bucket" id="bucket" aria-labelledby="bucket-title">
       <header class="bucket-head">
@@ -105,35 +54,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "seoul26-places-v3";
-  var KIND_LABELS = {
-    flight: "Flug",
-    stay: "Aufenthalt",
-    car: "Auto",
-    bucket: "Wunschliste"
-  };
-
-  var state = {
-    trip: null,
-    places: [],
-    editing: false,
-    showAdd: false,
-    seed: null
-  };
-
-  var routeEl = document.getElementById("route");
-    var datesEl = document.getElementById("trip-dates");
-  var btnEdit = document.getElementById("btn-edit");
-  var editPanel = document.getElementById("edit-panel");
-  var addCard = document.getElementById("add-card");
-  var addForm = document.getElementById("add-form");
-  var toastEl = document.getElementById("toast");
-  var toastTimer = null;
-
-  function uid() {
-    return "p-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
-  }
-
+  var KIND_LABELS = { flight: "Flug", stay: "Aufenthalt", car: "Auto", bucket: "Wunschliste" };
   var SECRET_PATTERNS = [
     /\b(pass(word|wort)|kennwort|passwd|pwd)\s*[:=]/i,
     /\b(api[_-]?key|secret[_-]?key|access[_-]?token|private[_-]?key|client[_-]?secret|authorization)\b/i,
@@ -141,6 +62,22 @@
     /-----BEGIN [A-Z0-9 ]+PRIVATE KEY-----/,
     /\bBearer\s+[A-Za-z0-9\-._~+/]+=*/
   ];
+  var routeEl = document.getElementById("route");
+  var datesEl = document.getElementById("trip-dates");
+  var bucketList = document.getElementById("bucket-list");
+  var toastEl = document.getElementById("toast");
+
+  try {
+    ["seoul26-places-v1", "seoul26-places-v2", "seoul26-places-v3", "seoul26-bucket-v1"].forEach(function (key) {
+      localStorage.removeItem(key);
+    });
+  } catch (e) {}
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("is-show");
+    setTimeout(function () { toastEl.classList.remove("is-show"); }, 2200);
+  }
 
   function looksSensitive(text) {
     var s = String(text || "");
@@ -149,150 +86,46 @@
       if (SECRET_PATTERNS[i].test(s)) return true;
     }
     var digits = s.replace(/\D/g, "");
-    if (digits.length >= 13 && digits.length <= 19 && /\d(?:[ -]?\d){12,18}/.test(s)) return true;
-    return false;
+    return digits.length >= 13 && digits.length <= 19 && /\d(?:[ -]?\d){12,18}/.test(s);
   }
 
-  function placeHasSensitive(place) {
-    return looksSensitive(place.name) || looksSensitive(place.when) || looksSensitive(place.note) || looksSensitive(place.maps);
-  }
-
-  function toast(msg) {
-    toastEl.textContent = msg;
-    toastEl.classList.add("is-show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () {
-      toastEl.classList.remove("is-show");
-    }, 2200);
-  }
-
-  function persist() {
-    for (var i = 0; i < state.places.length; i++) {
-      if (placeHasSensitive(state.places[i])) {
-        toast("Blockiert: sieht nach einem Passwort oder Zugangsdaten aus");
-        return false;
-      }
-    }
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        trip: state.trip,
-        places: state.places
-      }));
-    } catch (e) {
-      toast("Lokal speichern nicht möglich");
-      return false;
-    }
-    return true;
-  }
-
-  function loadFromStorage() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return null;
-      var data = JSON.parse(raw);
-      if (!data || !Array.isArray(data.places)) return null;
-      return data;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function normalizePlace(p) {
-    return {
-      id: p.id || uid(),
-      name: String(p.name || "").trim() || "Ohne Namen",
-      when: String(p.when || "").trim(),
-      note: String(p.note || "").trim(),
-      kind: ["flight", "stay", "car", "bucket"].indexOf(p.kind) >= 0 ? p.kind : "stay",
-      maps: String(p.maps || "").trim(),
-      done: !!p.done
-    };
-  }
-
-  function applyData(data) {
-    state.trip = data.trip || state.seed.trip;
-    state.places = (data.places || []).map(normalizePlace);
-    if (state.trip && state.trip.dates) datesEl.textContent = state.trip.dates;
-    render();
-  }
-
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function render() {
+  function renderRoute(places) {
     routeEl.innerHTML = "";
-    if (!state.places.length) {
-      var empty = document.createElement("p");
-      empty.className = "empty";
-      empty.textContent = "Noch keine Stopps. Bearbeitung einschalten, um einen hinzuzufügen.";
-      routeEl.appendChild(empty);
-      return;
-    }
-
-    state.places.forEach(function (place, index) {
+    places.forEach(function (place, index) {
       var li = document.createElement("li");
-      li.className = "stop" + (place.done ? " is-done" : "");
-      li.dataset.id = place.id;
-
+      li.className = "stop";
       var node = document.createElement("div");
       node.className = "stop-node";
-      node.innerHTML =
-        '<div class="node-ring" aria-hidden="true"></div>' +
-        '<span class="stop-index">' + String(index + 1).padStart(2, "0") + "</span>";
-
+      node.innerHTML = '<div class="node-ring" aria-hidden="true"></div><span class="stop-index">' + String(index + 1).padStart(2, "0") + "</span>";
       var card = document.createElement("article");
       card.className = "card";
-
       var top = document.createElement("div");
       top.className = "card-top";
-
       var title = document.createElement("h2");
       title.className = "card-title";
       title.textContent = place.name;
-
       var badges = document.createElement("div");
       badges.className = "badges";
       var kindBadge = document.createElement("span");
       kindBadge.className = "badge badge-" + place.kind;
       kindBadge.textContent = KIND_LABELS[place.kind] || place.kind;
       badges.appendChild(kindBadge);
-      if (place.kind === "bucket") {
-        var wish = document.createElement("span");
-        wish.className = "badge badge-bucket";
-        wish.textContent = "Wunschliste";
-        badges.appendChild(wish);
-      }
-      if (place.done) {
-        var doneBadge = document.createElement("span");
-        doneBadge.className = "badge badge-done";
-        doneBadge.textContent = "Erledigt";
-        badges.appendChild(doneBadge);
-      }
-
       top.appendChild(title);
       top.appendChild(badges);
       card.appendChild(top);
-
       if (place.when) {
         var when = document.createElement("p");
         when.className = "card-when";
         when.textContent = place.when;
         card.appendChild(when);
       }
-
       if (place.note) {
         var note = document.createElement("p");
         note.className = "card-note";
         note.textContent = place.note;
         card.appendChild(note);
       }
-
-      if (place.maps) {
+      if (place.maps && /^https?:\/\//i.test(place.maps)) {
         var links = document.createElement("div");
         links.className = "card-links";
         var a = document.createElement("a");
@@ -303,191 +136,11 @@
         links.appendChild(a);
         card.appendChild(links);
       }
-
-      var edit = document.createElement("div");
-      edit.className = "card-edit";
-      edit.innerHTML =
-        '<form class="form-grid edit-form">' +
-        '<div class="form-row"><label>Name</label><input name="name" required maxlength="120" value="' + escapeHtml(place.name) + '"></div>' +
-        '<div class="form-row"><label>Wann</label><input name="when" maxlength="160" value="' + escapeHtml(place.when) + '"></div>' +
-        '<div class="form-row"><label>Notiz</label><textarea name="note" maxlength="500">' + escapeHtml(place.note) + "</textarea></div>" +
-        '<div class="form-row"><label>Art</label><select name="kind">' +
-        kindOptions(place.kind) +
-        "</select></div>" +
-        '<div class="form-row"><label>Kartenlink</label><input name="maps" type="url" maxlength="500" value="' + escapeHtml(place.maps) + '"></div>' +
-        '<div class="form-actions">' +
-        '<button type="submit" class="btn btn-sm">Speichern</button>' +
-        '<button type="button" class="btn btn-sm btn-toggle-done" data-id="' + escapeHtml(place.id) + '">' +
-        (place.done ? "Als offen markieren" : "Als erledigt markieren") +
-        "</button>" +
-        '<button type="button" class="btn btn-sm btn-up" data-id="' + escapeHtml(place.id) + '" ' + (index === 0 ? "disabled" : "") + ">↑</button>" +
-        '<button type="button" class="btn btn-sm btn-down" data-id="' + escapeHtml(place.id) + '" ' + (index === state.places.length - 1 ? "disabled" : "") + ">↓</button>" +
-        '<button type="button" class="btn btn-sm btn-danger btn-delete" data-id="' + escapeHtml(place.id) + '">Löschen</button>' +
-        "</div></form>";
-
-      card.appendChild(edit);
       li.appendChild(node);
       li.appendChild(card);
       routeEl.appendChild(li);
-
-      var form = edit.querySelector(".edit-form");
-      form.addEventListener("submit", function (ev) {
-        ev.preventDefault();
-        var fd = new FormData(form);
-        place.name = String(fd.get("name") || "").trim() || place.name;
-        place.when = String(fd.get("when") || "").trim();
-        place.note = String(fd.get("note") || "").trim();
-        place.kind = String(fd.get("kind") || "stay");
-        place.maps = String(fd.get("maps") || "").trim();
-        if (placeHasSensitive(place)) {
-          toast("Blockiert: sieht nach einem Passwort oder Zugangsdaten aus");
-          return;
-        }
-        if (!persist()) return;
-        render();
-        toast("Stopp aktualisiert");
-      });
     });
   }
-
-  function kindOptions(selected) {
-    return ["flight", "stay", "car", "bucket"].map(function (k) {
-      return '<option value="' + k + '"' + (k === selected ? " selected" : "") + ">" + (KIND_LABELS[k] || k) + "</option>";
-    }).join("");
-  }
-
-  function findIndex(id) {
-    for (var i = 0; i < state.places.length; i++) {
-      if (state.places[i].id === id) return i;
-    }
-    return -1;
-  }
-
-  function setEditing(on) {
-    state.editing = !!on;
-    document.body.classList.toggle("is-editing", state.editing);
-    btnEdit.setAttribute("aria-pressed", state.editing ? "true" : "false");
-    btnEdit.textContent = state.editing ? "Fertig" : "Bearbeiten";
-    editPanel.hidden = !state.editing;
-    editPanel.classList.toggle("is-open", state.editing);
-    if (!state.editing) {
-      state.showAdd = false;
-      addCard.style.display = "";
-      addForm.reset();
-    }
-  }
-
-  btnEdit.addEventListener("click", function () {
-    setEditing(!state.editing);
-  });
-
-  document.getElementById("btn-add").addEventListener("click", function () {
-    state.showAdd = true;
-    addCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    document.getElementById("add-name").focus();
-  });
-
-  document.getElementById("btn-cancel-add").addEventListener("click", function () {
-    addForm.reset();
-  });
-
-  addForm.addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var fd = new FormData(addForm);
-    var place = normalizePlace({
-      id: uid(),
-      name: fd.get("name"),
-      when: fd.get("when"),
-      note: fd.get("note"),
-      kind: fd.get("kind"),
-      maps: fd.get("maps"),
-      done: false
-    });
-    if (placeHasSensitive(place)) {
-      toast("Blockiert: sieht nach einem Passwort oder Zugangsdaten aus");
-      return;
-    }
-    state.places.push(place);
-    if (!persist()) {
-      state.places.pop();
-      return;
-    }
-    addForm.reset();
-    render();
-    toast("Stopp hinzugefügt");
-  });
-
-  document.getElementById("btn-reset").addEventListener("click", function () {
-    if (!confirm("Auf die Vorlage aus places.json zurücksetzen? Lokale Änderungen gehen verloren.")) return;
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch (e) {}
-    applyData(JSON.parse(JSON.stringify(state.seed)));
-    toast("Auf die Vorlage zurückgesetzt");
-  });
-
-  document.getElementById("btn-download").addEventListener("click", function () {
-    var payload = {
-      trip: state.trip,
-      places: state.places
-    };
-    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement("a");
-    a.href = url;
-    a.download = "places.json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-    toast("Liste heruntergeladen");
-  });
-
-  routeEl.addEventListener("click", function (ev) {
-    var t = ev.target;
-    if (!(t instanceof HTMLElement)) return;
-    var id = t.getAttribute("data-id");
-    if (!id) return;
-    var idx = findIndex(id);
-    if (idx < 0) return;
-
-    if (t.classList.contains("btn-delete")) {
-      if (!confirm("Diesen Stopp löschen?")) return;
-      state.places.splice(idx, 1);
-      persist();
-      render();
-      toast("Stopp gelöscht");
-      return;
-    }
-
-    if (t.classList.contains("btn-toggle-done")) {
-      state.places[idx].done = !state.places[idx].done;
-      persist();
-      render();
-      toast(state.places[idx].done ? "Als erledigt markiert" : "Als offen markiert");
-      return;
-    }
-
-    if (t.classList.contains("btn-up") && idx > 0) {
-      var tmp = state.places[idx - 1];
-      state.places[idx - 1] = state.places[idx];
-      state.places[idx] = tmp;
-      persist();
-      render();
-      return;
-    }
-
-    if (t.classList.contains("btn-down") && idx < state.places.length - 1) {
-      var tmp2 = state.places[idx + 1];
-      state.places[idx + 1] = state.places[idx];
-      state.places[idx] = tmp2;
-      persist();
-      render();
-    }
-  });
-
-
-  var bucketList = document.getElementById("bucket-list");
 
   function renderBucket(items) {
     bucketList.innerHTML = "";
@@ -528,79 +181,48 @@
     });
   }
 
-  function loadBucketFromRepo() {
-    try { localStorage.removeItem("seoul26-bucket-v1"); } catch (e) {}
-    fetch("https://api.github.com/repos/yelggy/seoul26/contents/bucket", {
-      headers: { Accept: "application/vnd.github+json" }
-    })
-      .then(function (r) {
-        if (!r.ok) throw new Error("list failed");
-        return r.json();
-      })
-      .then(function (files) {
-        var jsonFiles = (files || []).filter(function (f) {
-          return f && f.type === "file" && /\.json$/i.test(f.name);
-        });
-        return Promise.all(jsonFiles.map(function (f) {
-          return fetch(f.download_url).then(function (r) {
-            if (!r.ok) return null;
-            return r.json();
-          }).catch(function () { return null; });
-        }));
-      })
-      .then(function (docs) {
-        var items = [];
-        var skipped = 0;
-        (docs || []).forEach(function (doc) {
-          if (!doc || typeof doc !== "object") return;
-          var item = {
-            name: String(doc.name || "").trim(),
-            when: String(doc.when || "").trim(),
-            note: String(doc.note || "").trim(),
-            maps: String(doc.maps || "").trim()
-          };
-          if (!item.name) return;
-          if (placeHasSensitive(item)) {
-            skipped += 1;
-            return;
-          }
-          items.push(item);
-        });
-        items.sort(function (a, b) { return a.name.localeCompare(b.name); });
-        renderBucket(items);
-        if (skipped) toast("Übersprungen: " + skipped + " sensible Datei" + (skipped === 1 ? "" : "s"));
-      })
-      .catch(function () {
-        bucketList.innerHTML = '<li class="bucket-empty">Die Wunschliste konnte nicht geladen werden.</li>';
-      });
-  }
-
-  loadBucketFromRepo();
-
-  fetch("./places.json")
-    .then(function (r) {
-      if (!r.ok) throw new Error("Failed to load places.json");
-      return r.json();
-    })
-    .then(function (seed) {
-      state.seed = seed;
-      var saved = loadFromStorage();
-      if (saved) {
-        var dirty = (saved.places || []).some(placeHasSensitive);
-        if (dirty) {
-          try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-          applyData(seed);
-          toast("Eine gespeicherte Änderung mit sensiblem Inhalt wurde verworfen");
-        } else {
-          applyData(saved);
-          toast("Gespeicherte Änderungen geladen");
-        }
-      } else {
-        applyData(seed);
-      }
+  fetch("./places.json?v=4")
+    .then(function (r) { if (!r.ok) throw new Error("fail"); return r.json(); })
+    .then(function (data) {
+      if (data.trip && data.trip.dates) datesEl.textContent = data.trip.dates;
+      renderRoute(data.places || []);
     })
     .catch(function () {
-      routeEl.innerHTML = '<p class="empty">places.json konnte nicht geladen werden</p>';
+      routeEl.innerHTML = '<p class="empty">Die Route konnte nicht geladen werden.</p>';
+    });
+
+  fetch("https://api.github.com/repos/yelggy/seoul26/contents/bucket", { headers: { Accept: "application/vnd.github+json" } })
+    .then(function (r) { if (!r.ok) throw new Error("list"); return r.json(); })
+    .then(function (files) {
+      var jsonFiles = (files || []).filter(function (f) { return f && f.type === "file" && /\.json$/i.test(f.name); });
+      return Promise.all(jsonFiles.map(function (f) {
+        return fetch(f.download_url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+      }));
+    })
+    .then(function (docs) {
+      var items = [];
+      var skipped = 0;
+      (docs || []).forEach(function (doc) {
+        if (!doc || typeof doc !== "object") return;
+        var item = {
+          name: String(doc.name || "").trim(),
+          when: String(doc.when || "").trim(),
+          note: String(doc.note || "").trim(),
+          maps: String(doc.maps || "").trim()
+        };
+        if (!item.name) return;
+        if (looksSensitive(item.name) || looksSensitive(item.when) || looksSensitive(item.note) || looksSensitive(item.maps)) {
+          skipped += 1;
+          return;
+        }
+        items.push(item);
+      });
+      items.sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
+      renderBucket(items);
+      if (skipped) toast("Übersprungen: " + skipped + " sensible Datei" + (skipped === 1 ? "" : "en"));
+    })
+    .catch(function () {
+      bucketList.innerHTML = '<li class="bucket-empty">Die Wunschliste konnte nicht geladen werden.</li>';
     });
 })();
   </script>
