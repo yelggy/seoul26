@@ -26,10 +26,10 @@
       <p class="hero-sub" id="trip-dates">5.–17. Oktober 2026</p>
       <div class="toolbar">
         <button type="button" class="btn btn-primary" id="btn-edit" aria-pressed="false">Bearbeiten</button>
-        <button type="button" class="btn btn-ghost" id="btn-download" title="Aktuelle Liste als places.json herunterladen">JSON herunterladen</button>
+        <button type="button" class="btn btn-ghost" id="btn-download" title="Aktuelle Liste herunterladen">Liste herunterladen</button>
       </div>
       <div class="edit-panel" id="edit-panel" hidden>
-        <p>Änderungen bleiben in diesem Browser. Die Vorlage liegt in <code>places.json</code>. Passwörter, Tokens und Kartennummern werden blockiert und nicht gespeichert.</p>
+        <p>Änderungen bleiben in diesem Browser. Die Vorlage liegt in <code>places.json</code>. Passwörter, Zugangsdaten und Kartennummern werden blockiert und nicht gespeichert.</p>
         <div class="edit-actions">
           <button type="button" class="btn btn-sm" id="btn-add">+ Stopp hinzufügen</button>
           <button type="button" class="btn btn-sm btn-danger" id="btn-reset">Auf Vorlage zurücksetzen</button>
@@ -52,7 +52,7 @@
         <form class="form-grid" id="add-form">
           <div class="form-row">
             <label for="add-name">Name</label>
-            <input id="add-name" name="name" required maxlength="120" placeholder="Place name">
+            <input id="add-name" name="name" required maxlength="120" placeholder="Name des Orts">
           </div>
           <div class="form-row">
             <label for="add-when">Wann</label>
@@ -72,7 +72,7 @@
             </select>
           </div>
           <div class="form-row">
-            <label for="add-maps">Maps URL</label>
+            <label for="add-maps">Kartenlink</label>
             <input id="add-maps" name="maps" type="url" maxlength="500" placeholder="https://…">
           </div>
           <div class="form-actions">
@@ -87,10 +87,10 @@
     <section class="bucket" id="bucket" aria-labelledby="bucket-title">
       <header class="bucket-head">
         <p class="hero-kicker">Wunschliste</p>
-        <h2 id="bucket-title">Bucket List</h2>
+        <h2 id="bucket-title">Wunschliste</h2>
         <p class="bucket-lead">Eigener Bereich. Die Einträge kommen aus den Dateien <code>bucket/*.json</code> im Repository. Eine neue Datei erscheint nach dem nächsten Seiten-Build. Einträge, die wie Passwörter oder Secrets aussehen, werden übersprungen.</p>
       </header>
-      <ul class="bucket-list" id="bucket-list" aria-label="Bucket List aus dem Repository"></ul>
+      <ul class="bucket-list" id="bucket-list" aria-label="Wunschliste aus dem Repository"></ul>
     </section>
 
     <footer class="footer">
@@ -105,7 +105,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "seoul26-places-v2";
+  var STORAGE_KEY = "seoul26-places-v3";
   var KIND_LABELS = {
     flight: "Flug",
     stay: "Aufenthalt",
@@ -169,7 +169,7 @@
   function persist() {
     for (var i = 0; i < state.places.length; i++) {
       if (placeHasSensitive(state.places[i])) {
-        toast("Blockiert: sieht nach Passwort oder Secret aus");
+        toast("Blockiert: sieht nach einem Passwort oder Zugangsdaten aus");
         return false;
       }
     }
@@ -314,7 +314,7 @@
         '<div class="form-row"><label>Art</label><select name="kind">' +
         kindOptions(place.kind) +
         "</select></div>" +
-        '<div class="form-row"><label>Maps URL</label><input name="maps" type="url" maxlength="500" value="' + escapeHtml(place.maps) + '"></div>' +
+        '<div class="form-row"><label>Kartenlink</label><input name="maps" type="url" maxlength="500" value="' + escapeHtml(place.maps) + '"></div>' +
         '<div class="form-actions">' +
         '<button type="submit" class="btn btn-sm">Speichern</button>' +
         '<button type="button" class="btn btn-sm btn-toggle-done" data-id="' + escapeHtml(place.id) + '">' +
@@ -340,7 +340,7 @@
         place.kind = String(fd.get("kind") || "stay");
         place.maps = String(fd.get("maps") || "").trim();
         if (placeHasSensitive(place)) {
-          toast("Blockiert: sieht nach Passwort oder Secret aus");
+          toast("Blockiert: sieht nach einem Passwort oder Zugangsdaten aus");
           return;
         }
         if (!persist()) return;
@@ -404,7 +404,7 @@
       done: false
     });
     if (placeHasSensitive(place)) {
-      toast("Blockiert: sieht nach Passwort oder Secret aus");
+      toast("Blockiert: sieht nach einem Passwort oder Zugangsdaten aus");
       return;
     }
     state.places.push(place);
@@ -440,7 +440,7 @@
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
-    toast("places.json heruntergeladen");
+    toast("Liste heruntergeladen");
   });
 
   routeEl.addEventListener("click", function (ev) {
@@ -494,7 +494,7 @@
     if (!items.length) {
       var empty = document.createElement("li");
       empty.className = "bucket-empty";
-      empty.textContent = "Noch keine Bucket-List-Dateien.";
+      empty.textContent = "Noch keine Wünsche in der Liste.";
       bucketList.appendChild(empty);
       return;
     }
@@ -568,10 +568,10 @@
         });
         items.sort(function (a, b) { return a.name.localeCompare(b.name); });
         renderBucket(items);
-        if (skipped) toast("Übersprungen: " + skipped + " sensible Bucket-Datei" + (skipped === 1 ? "" : "s"));
+        if (skipped) toast("Übersprungen: " + skipped + " sensible Datei" + (skipped === 1 ? "" : "s"));
       })
       .catch(function () {
-        bucketList.innerHTML = '<li class="bucket-empty">Bucket-List-Dateien konnten nicht geladen werden.</li>';
+        bucketList.innerHTML = '<li class="bucket-empty">Die Wunschliste konnte nicht geladen werden.</li>';
       });
   }
 

@@ -42,9 +42,9 @@
     },
     {
       "id": "downtown-car",
-      "name": "Seoul Downtown",
+      "name": "Seoul Innenstadt",
       "when": "Sa 10. Okt. 2026 · 11:00",
-      "note": "Mietwagen abholen: Hyundai Santa Fe (DiscoverCars).",
+      "note": "Mietwagen abholen: Hyundai Santa Fe.",
       "kind": "car",
       "maps": "",
       "done": false
