@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/styles.css?v=6">
+  <link rel="stylesheet" href="./assets/styles.css?v=7">
 </head>
 <body>
   <main class="wrap">
@@ -31,10 +31,27 @@
     </header>
 
     <section class="bucket" id="bucket" aria-labelledby="bucket-title">
-      <header class="bucket-head">
-        <h2 id="bucket-title">Bucketlist</h2>
-      </header>
-      <ul class="bucket-list" id="bucket-list" aria-label="Bucketlist aus dem Repository"></ul>
+      <div id="bucket-list-view">
+        <header class="bucket-head">
+          <h2 id="bucket-title" tabindex="-1">Bucketlist</h2>
+        </header>
+        <div class="bucket-groups" id="bucket-groups"></div>
+      </div>
+
+      <article class="bucket-detail" id="bucket-detail" hidden>
+        <button type="button" class="btn detail-back" id="bucket-back">Zurück</button>
+        <h2 id="detail-name"></h2>
+        <p class="detail-city" id="detail-city"></p>
+        <p class="detail-note" id="detail-note" hidden></p>
+        <p class="detail-reviews">Fotos und Bewertungen stehen auf Google Maps.</p>
+        <div class="detail-actions">
+          <a id="detail-photos" href="#" target="_blank" rel="noopener noreferrer">Fotos auf Google Maps</a>
+          <a id="detail-maps" href="#" target="_blank" rel="noopener noreferrer">In Google Maps öffnen</a>
+        </div>
+        <div class="detail-map" id="detail-map-wrap" hidden>
+          <iframe id="detail-map" title="Karte" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </article>
     </section>
 
     <footer class="footer">
@@ -54,8 +71,18 @@
     /-----BEGIN [A-Z0-9 ]+PRIVATE KEY-----/,
     /\bBearer\s+[A-Za-z0-9\-._~+/]+=*/
   ];
-  var bucketList = document.getElementById("bucket-list");
+  var groupsEl = document.getElementById("bucket-groups");
+  var listView = document.getElementById("bucket-list-view");
+  var detailEl = document.getElementById("bucket-detail");
   var toastEl = document.getElementById("toast");
+  var detailName = document.getElementById("detail-name");
+  var detailCity = document.getElementById("detail-city");
+  var detailNote = document.getElementById("detail-note");
+  var detailPhotos = document.getElementById("detail-photos");
+  var detailMaps = document.getElementById("detail-maps");
+  var detailMapWrap = document.getElementById("detail-map-wrap");
+  var detailMap = document.getElementById("detail-map");
+  var items = [];
 
   function toast(msg) {
     toastEl.textContent = msg;
@@ -73,44 +100,128 @@
     return digits.length >= 13 && digits.length <= 19 && /\d(?:[ -]?\d){12,18}/.test(s);
   }
 
-  function renderBucket(items) {
-    bucketList.innerHTML = "";
-    if (!items.length) {
-      var empty = document.createElement("li");
+  function isHttp(url) {
+    return /^https?:\/\//i.test(url || "");
+  }
+
+  function queryFromMaps(url) {
+    try {
+      var u = new URL(url);
+      return u.searchParams.get("query") || u.searchParams.get("q") || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function cityRank(city) {
+    if (city === "Seoul") return "0";
+    if (city === "Busan") return "1";
+    if (city === "Korea") return "9";
+    return "2" + city;
+  }
+
+  function showList() {
+    detailMap.removeAttribute("src");
+    detailEl.hidden = true;
+    listView.hidden = false;
+    var title = document.getElementById("bucket-title");
+    if (title) title.focus();
+  }
+
+  function showDetail(item) {
+    detailName.textContent = item.name;
+    detailCity.textContent = item.city || "Korea";
+    if (item.note) {
+      detailNote.hidden = false;
+      detailNote.textContent = item.note;
+    } else {
+      detailNote.hidden = true;
+      detailNote.textContent = "";
+    }
+    var photos = isHttp(item.photos) ? item.photos : (isHttp(item.maps) ? item.maps : "");
+    var maps = isHttp(item.maps) ? item.maps : photos;
+    if (photos) {
+      detailPhotos.hidden = false;
+      detailPhotos.href = photos;
+    } else {
+      detailPhotos.hidden = true;
+    }
+    if (maps) {
+      detailMaps.hidden = false;
+      detailMaps.href = maps;
+    } else {
+      detailMaps.hidden = true;
+    }
+    var q = queryFromMaps(maps);
+    if (q) {
+      detailMapWrap.hidden = false;
+      detailMap.src = "https://maps.google.com/maps?q=" + encodeURIComponent(q) + "&output=embed";
+    } else {
+      detailMapWrap.hidden = true;
+      detailMap.removeAttribute("src");
+    }
+    listView.hidden = true;
+    detailEl.hidden = false;
+    detailName.focus();
+    window.scrollTo(0, 0);
+  }
+
+  function renderBucket(list) {
+    groupsEl.innerHTML = "";
+    if (!list.length) {
+      var empty = document.createElement("p");
       empty.className = "bucket-empty";
       empty.textContent = "Noch keine Wünsche in der Liste.";
-      bucketList.appendChild(empty);
+      groupsEl.appendChild(empty);
       return;
     }
-    items.forEach(function (item) {
-      var li = document.createElement("li");
-      li.className = "bucket-item";
-      var body = document.createElement("div");
-      var title = document.createElement("h3");
-      title.textContent = item.name;
-      body.appendChild(title);
-      if (item.when) {
-        var when = document.createElement("p");
-        when.textContent = item.when;
-        body.appendChild(when);
-      }
-      if (item.note) {
-        var note = document.createElement("p");
-        note.textContent = item.note;
-        body.appendChild(note);
-      }
-      if (item.maps && /^https?:\/\//i.test(item.maps)) {
-        var a = document.createElement("a");
-        a.href = item.maps;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.textContent = "Karte";
-        body.appendChild(a);
-      }
-      li.appendChild(body);
-      bucketList.appendChild(li);
+    var byCity = {};
+    list.forEach(function (item) {
+      var city = item.city || "Korea";
+      if (!byCity[city]) byCity[city] = [];
+      byCity[city].push(item);
+    });
+    Object.keys(byCity).sort(function (a, b) {
+      var ra = cityRank(a);
+      var rb = cityRank(b);
+      if (ra < rb) return -1;
+      if (ra > rb) return 1;
+      return a.localeCompare(b, "de");
+    }).forEach(function (city) {
+      var section = document.createElement("section");
+      var heading = document.createElement("h3");
+      heading.className = "bucket-city";
+      heading.textContent = city;
+      var ul = document.createElement("ul");
+      ul.className = "bucket-entries";
+      byCity[city].sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
+      byCity[city].forEach(function (item) {
+        var li = document.createElement("li");
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "bucket-entry";
+        var name = document.createElement("span");
+        name.className = "bucket-entry-name";
+        name.textContent = item.name;
+        btn.appendChild(name);
+        if (item.note) {
+          var note = document.createElement("span");
+          note.className = "bucket-entry-note";
+          note.textContent = item.note;
+          btn.appendChild(note);
+        }
+        btn.addEventListener("click", function () { showDetail(item); });
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+      section.appendChild(heading);
+      section.appendChild(ul);
+      groupsEl.appendChild(section);
     });
   }
+
+  document.getElementById("bucket-back").addEventListener("click", showList);
+  detailName.tabIndex = -1;
 
   fetch("https://api.github.com/repos/yelggy/seoul26/contents/bucket", { headers: { Accept: "application/vnd.github+json" } })
     .then(function (r) { if (!r.ok) throw new Error("list"); return r.json(); })
@@ -121,29 +232,30 @@
       }));
     })
     .then(function (docs) {
-      var items = [];
+      items = [];
       var skipped = 0;
       (docs || []).forEach(function (doc) {
         if (!doc || typeof doc !== "object") return;
         var item = {
           name: String(doc.name || "").trim(),
+          city: String(doc.city || "").trim() || "Korea",
           when: String(doc.when || "").trim(),
           note: String(doc.note || "").trim(),
-          maps: String(doc.maps || "").trim()
+          maps: String(doc.maps || "").trim(),
+          photos: String(doc.photos || "").trim()
         };
         if (!item.name) return;
-        if (looksSensitive(item.name) || looksSensitive(item.when) || looksSensitive(item.note) || looksSensitive(item.maps)) {
+        if (looksSensitive(item.name) || looksSensitive(item.city) || looksSensitive(item.when) || looksSensitive(item.note) || looksSensitive(item.maps) || looksSensitive(item.photos)) {
           skipped += 1;
           return;
         }
         items.push(item);
       });
-      items.sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
       renderBucket(items);
       if (skipped) toast("Übersprungen: " + skipped + " sensible Datei" + (skipped === 1 ? "" : "en"));
     })
     .catch(function () {
-      bucketList.innerHTML = '<li class="bucket-empty">Die Bucketlist konnte nicht geladen werden.</li>';
+      groupsEl.innerHTML = '<p class="bucket-empty">Die Bucketlist konnte nicht geladen werden.</p>';
     });
 })();
   </script>

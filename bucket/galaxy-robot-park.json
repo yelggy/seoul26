@@ -1,6 +1,8 @@
 {
   "name": "Galaxy Robot Park (갤럭시 로봇파크)",
+  "city": "Seoul",
   "when": "Bucketlist",
   "note": "103 Arisu-ro 61-gil, Gangdong-gu, Seoul.",
-  "maps": "https://www.google.com/maps/search/?api=1&query=Galaxy+Robot+Park+103+Arisu-ro+61-gil+Gangdong-gu+Seoul"
+  "maps": "https://www.google.com/maps/search/?api=1&query=Galaxy+Robot+Park+103+Arisu-ro+61-gil+Gangdong-gu+Seoul",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Galaxy+Robot+Park+103+Arisu-ro+61-gil+Gangdong-gu+Seoul"
 }
