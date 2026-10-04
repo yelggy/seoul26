@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/styles.css?v=9">
+  <link rel="stylesheet" href="./assets/styles.css?v=11">
 </head>
 <body>
   <main class="wrap">
@@ -38,7 +38,13 @@
         </header>
         <div class="bucket-filter" role="group" aria-label="Bucketlist filtern">
           <button type="button" class="bucket-filter-btn is-on" data-filter="all" aria-pressed="true">Alle</button>
-          <button type="button" class="bucket-filter-btn" data-filter="Cyrill" aria-pressed="false">Cyrill</button>
+          <button type="button" class="bucket-filter-btn is-source" data-filter="Cyrill" aria-pressed="false">Cyrill</button>
+          <span class="bucket-filter-gap" aria-hidden="true"></span>
+          <button type="button" class="bucket-filter-btn" data-filter="Kaffee" aria-pressed="false">Kaffee</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Restaurant" aria-pressed="false">Restaurant</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Aktivitäten" aria-pressed="false">Aktivitäten</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Natur" aria-pressed="false">Natur</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Sehenswürdigkeiten" aria-pressed="false">Sehenswürdigkeiten</button>
         </div>
         <ul class="bucket-entries" id="bucket-list"></ul>
       </div>
@@ -219,10 +225,11 @@
   }
 
   function visibleItems(list) {
+    if (filter === "all") return list.slice();
     if (filter === "Cyrill") {
       return list.filter(function (item) { return item.from === "Cyrill"; });
     }
-    return list.slice();
+    return list.filter(function (item) { return item.category === filter; });
   }
 
   function renderBucket(list) {
@@ -231,7 +238,9 @@
     if (!shown.length) {
       var empty = document.createElement("li");
       empty.className = "bucket-empty";
-      empty.textContent = filter === "Cyrill" ? "Keine Orte von Cyrill." : "Noch keine Wünsche in der Liste.";
+      empty.textContent = filter === "all"
+        ? "Noch keine Wünsche in der Liste."
+        : (filter === "Cyrill" ? "Keine Orte von Cyrill." : "Keine Orte unter " + filter + ".");
       listEl.appendChild(empty);
       return;
     }
@@ -308,7 +317,8 @@
           lat: finiteCoord(doc.lat),
           lng: finiteCoord(doc.lng),
           images: images,
-          from: String(doc.from || "").trim()
+          from: String(doc.from || "").trim(),
+          category: String(doc.category || "").trim()
         };
         if (!item.name || !item.id) return;
         var blob = [item.name, item.when, item.note, item.maps, item.photos, item.from].concat(images).join("\n");

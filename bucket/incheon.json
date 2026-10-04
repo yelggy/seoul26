@@ -6,5 +6,6 @@
   "maps": "https://www.google.com/maps/search/?api=1&query=Incheon",
   "photos": "https://www.google.com/maps/search/?api=1&query=Incheon",
   "images": [],
-  "from": ""
+  "from": "",
+  "category": "Sehenswürdigkeiten"
 }

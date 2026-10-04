@@ -740,7 +740,89 @@ body.is-editing .add-card {
   font-size: 2rem;
   font-weight: 560;
   letter-spacing: -0.03em;
-  margin: 0.2rem 0 0.4rem;
+  margin: 0.2rem 0 0.15rem;
+}
+
+.bucket-filter {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.7rem -1rem 1rem;
+  padding: 0.15rem 1rem 0.45rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bucket-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.bucket-filter-btn {
+  appearance: none;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: #d6d0c6;
+  background: #16161b;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.05rem;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+  transition: background 0.18s var(--ease), color 0.18s var(--ease), border-color 0.18s var(--ease);
+}
+
+.bucket-filter-btn:hover {
+  color: var(--text);
+  background: #1e1e24;
+}
+
+.bucket-filter-btn.is-on {
+  color: #1c1917;
+  background: #f3ede3;
+  border-color: #f3ede3;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+.bucket-filter-btn.is-source {
+  color: #1c1917;
+  background: #fbbf24;
+  border-color: #fbbf24;
+}
+
+.bucket-filter-btn.is-source:hover {
+  color: #1c1917;
+  background: #ffd27a;
+}
+
+.bucket-filter-btn.is-source.is-on {
+  color: #1c1917;
+  background: #f3ede3;
+  border-color: #fbbf24;
+  box-shadow: inset 0 0 0 2px #fbbf24, 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+.bucket-filter-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.bucket-filter-gap {
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 1px;
+  margin: 0.45rem 0.2rem;
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .bucket-lead {
@@ -848,12 +930,36 @@ body.is-editing .add-card {
   outline-offset: 3px;
 }
 
+.bucket-entry-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
 .bucket-entry-name {
   font-family: var(--display);
   font-size: 1.12rem;
   font-weight: 560;
   letter-spacing: -0.02em;
   line-height: 1.25;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.bucket-from {
+  flex: 0 0 auto;
+  margin-top: 0.16rem;
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #1c1917;
+  background: #fbbf24;
+  border-radius: 999px;
+  padding: 0.32rem 0.55rem;
+  white-space: nowrap;
 }
 
 .bucket-entry-note {
