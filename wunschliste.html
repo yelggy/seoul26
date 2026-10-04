@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Seoul 26 — Wunschliste</title>
-  <meta name="description" content="Seoul 26 · Wunschliste · 5.–17. Oktober 2026.">
+  <title>Korea 26 — Bucketlist</title>
+  <meta name="description" content="Korea 26 · Bucketlist · 5.–17. Oktober 2026.">
   <meta name="theme-color" content="#0a0a0c">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Seoul 26 — Wunschliste">
-  <meta property="og:description" content="Wunschliste · Seoul 26 · 5.–17. Oktober 2026.">
+  <meta property="og:title" content="Korea 26 — Bucketlist">
+  <meta property="og:description" content="Bucketlist · Korea 26 · 5.–17. Oktober 2026.">
   <meta property="og:url" content="https://yelggy.github.io/seoul26/wunschliste.html">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Seoul 26 — Wunschliste">
-  <meta name="twitter:description" content="Wunschliste · Seoul 26 · 5.–17. Oktober 2026.">
+  <meta name="twitter:title" content="Korea 26 — Bucketlist">
+  <meta name="twitter:description" content="Bucketlist · Korea 26 · 5.–17. Oktober 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -21,24 +21,24 @@
 <body>
   <main class="wrap">
     <header class="hero">
-      <p class="hero-kicker">Wunschliste</p>
-      <h1>Seoul 26</h1>
+      <p class="hero-kicker">Bucketlist</p>
+      <h1>Korea 26</h1>
       <p class="hero-sub">5.–17. Oktober 2026</p>
       <nav class="tabs" aria-label="Seiten">
         <a href="./">Route</a>
-        <a href="./wunschliste.html" aria-current="page">Wunschliste</a>
+        <a href="./wunschliste.html" aria-current="page">Bucketlist</a>
       </nav>
     </header>
 
     <section class="bucket" id="bucket" aria-labelledby="bucket-title">
       <header class="bucket-head">
-        <h2 id="bucket-title">Wunschliste</h2>
+        <h2 id="bucket-title">Bucketlist</h2>
       </header>
-      <ul class="bucket-list" id="bucket-list" aria-label="Wunschliste aus dem Repository"></ul>
+      <ul class="bucket-list" id="bucket-list" aria-label="Bucketlist aus dem Repository"></ul>
     </section>
 
     <footer class="footer">
-      <p>Seoul 26</p>
+      <p>Korea 26</p>
     </footer>
   </main>
 
@@ -143,7 +143,7 @@
       if (skipped) toast("Übersprungen: " + skipped + " sensible Datei" + (skipped === 1 ? "" : "en"));
     })
     .catch(function () {
-      bucketList.innerHTML = '<li class="bucket-empty">Die Wunschliste konnte nicht geladen werden.</li>';
+      bucketList.innerHTML = '<li class="bucket-empty">Die Bucketlist konnte nicht geladen werden.</li>';
     });
 })();
   </script>

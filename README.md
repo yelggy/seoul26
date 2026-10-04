@@ -1,4 +1,4 @@
-# Seoul 26
+# Korea 26
 
 Night-route trip journal for Carlo, Cyrill, Simon & Adrian — **5–17 October 2026**.
 
