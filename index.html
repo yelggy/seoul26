@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seoul 26 — Night Route</title>
+  <meta name="description" content="Seoul 26 trip journal · 5–17 October 2026 · Carlo, Cyrill, Simon & Adrian.">
+  <meta name="theme-color" content="#0a0a0c">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Seoul 26 — Night Route">
+  <meta property="og:description" content="Trip journal · Zürich → München → Seoul · 5–17 Oct 2026.">
+  <meta property="og:url" content="https://yelggy.github.io/seoul26/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Seoul 26 — Night Route">
+  <meta name="twitter:description" content="Trip journal · Zürich → München → Seoul · 5–17 Oct 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="hero-kicker">Nachtroute · Night Route</p>
+      <h1>Seoul 26</h1>
+      <p class="hero-sub" id="trip-dates">5–17 October 2026</p>
+      <ul class="crew" id="crew-list" aria-label="Crew"></ul>
+      <div class="toolbar">
+        <button type="button" class="btn btn-primary" id="btn-edit" aria-pressed="false">Edit · Bearbeiten</button>
+        <button type="button" class="btn btn-ghost" id="btn-download" title="Download current list as places.json">Download JSON</button>
+      </div>
+      <div class="edit-panel" id="edit-panel" hidden>
+        <p>Edits stay in this browser (localStorage). Seed lives in <code>places.json</code>.</p>
+        <div class="edit-actions">
+          <button type="button" class="btn btn-sm" id="btn-add">+ Add stop</button>
+          <button type="button" class="btn btn-sm btn-danger" id="btn-reset">Reset to seed</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="legend" aria-hidden="true">
+      <span><i class="dot dot-flight"></i> Flight · Flug</span>
+      <span><i class="dot dot-stay"></i> Stay · Aufenthalt</span>
+      <span><i class="dot dot-car"></i> Car · Auto</span>
+      <span><i class="dot dot-bucket"></i> Bucket · Wunschliste</span>
+    </div>
+
+    <ol class="route" id="route" aria-label="Route stops"></ol>
+
+    <section class="add-card" id="add-card" aria-label="Add stop">
+      <div class="card">
+        <h2>New stop · Neuer Stopp</h2>
+        <form class="form-grid" id="add-form">
+          <div class="form-row">
+            <label for="add-name">Name</label>
+            <input id="add-name" name="name" required maxlength="120" placeholder="Place name">
+          </div>
+          <div class="form-row">
+            <label for="add-when">When · Wann</label>
+            <input id="add-when" name="when" maxlength="160" placeholder="e.g. Sat 10 Oct · 11:00">
+          </div>
+          <div class="form-row">
+            <label for="add-note">Note · Notiz</label>
+            <textarea id="add-note" name="note" maxlength="500" placeholder="Optional note"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="add-kind">Kind · Art</label>
+            <select id="add-kind" name="kind">
+              <option value="flight">flight</option>
+              <option value="stay">stay</option>
+              <option value="car">car</option>
+              <option value="bucket">bucket</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="add-maps">Maps URL</label>
+            <input id="add-maps" name="maps" type="url" maxlength="500" placeholder="https://…">
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-sm btn-primary">Save stop</button>
+            <button type="button" class="btn btn-sm" id="btn-cancel-add">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Seoul 26 · Carlo, Cyrill, Simon, Adrian</p>
+      <p><a href="https://github.com/yelggy/seoul26" target="_blank" rel="noopener noreferrer">GitHub repo</a></p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "seoul26-places-v1";
+  var KIND_LABELS = {
+    flight: "Flight",
+    stay: "Stay",
+    car: "Car",
+    bucket: "Bucket"
+  };
+
+  var state = {
+    trip: null,
+    places: [],
+    editing: false,
+    showAdd: false,
+    seed: null
+  };
+
+  var routeEl = document.getElementById("route");
+  var crewEl = document.getElementById("crew-list");
+  var datesEl = document.getElementById("trip-dates");
+  var btnEdit = document.getElementById("btn-edit");
+  var editPanel = document.getElementById("edit-panel");
+  var addCard = document.getElementById("add-card");
+  var addForm = document.getElementById("add-form");
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+
+  function uid() {
+    return "p-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
+  }
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("is-show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toastEl.classList.remove("is-show");
+    }, 2200);
+  }
+
+  function persist() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        trip: state.trip,
+        places: state.places
+      }));
+    } catch (e) {
+      toast("Could not save locally");
+    }
+  }
+
+  function loadFromStorage() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || !Array.isArray(data.places)) return null;
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function normalizePlace(p) {
+    return {
+      id: p.id || uid(),
+      name: String(p.name || "").trim() || "Untitled",
+      when: String(p.when || "").trim(),
+      note: String(p.note || "").trim(),
+      kind: ["flight", "stay", "car", "bucket"].indexOf(p.kind) >= 0 ? p.kind : "stay",
+      maps: String(p.maps || "").trim(),
+      done: !!p.done
+    };
+  }
+
+  function applyData(data) {
+    state.trip = data.trip || state.seed.trip;
+    state.places = (data.places || []).map(normalizePlace);
+    if (state.trip.dates) datesEl.textContent = state.trip.dates;
+    crewEl.innerHTML = "";
+    (state.trip.crew || []).forEach(function (name) {
+      var li = document.createElement("li");
+      li.textContent = name.split(" ")[0];
+      li.title = name;
+      crewEl.appendChild(li);
+    });
+    render();
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function render() {
+    routeEl.innerHTML = "";
+    if (!state.places.length) {
+      var empty = document.createElement("p");
+      empty.className = "empty";
+      empty.textContent = "No stops yet. Turn on Edit to add one.";
+      routeEl.appendChild(empty);
+      return;
+    }
+
+    state.places.forEach(function (place, index) {
+      var li = document.createElement("li");
+      li.className = "stop" + (place.done ? " is-done" : "");
+      li.dataset.id = place.id;
+
+      var node = document.createElement("div");
+      node.className = "stop-node";
+      node.innerHTML =
+        '<div class="node-ring" aria-hidden="true"></div>' +
+        '<span class="stop-index">' + String(index + 1).padStart(2, "0") + "</span>";
+
+      var card = document.createElement("article");
+      card.className = "card";
+
+      var top = document.createElement("div");
+      top.className = "card-top";
+
+      var title = document.createElement("h2");
+      title.className = "card-title";
+      title.textContent = place.name;
+
+      var badges = document.createElement("div");
+      badges.className = "badges";
+      var kindBadge = document.createElement("span");
+      kindBadge.className = "badge badge-" + place.kind;
+      kindBadge.textContent = KIND_LABELS[place.kind] || place.kind;
+      badges.appendChild(kindBadge);
+      if (place.kind === "bucket") {
+        var wish = document.createElement("span");
+        wish.className = "badge badge-bucket";
+        wish.textContent = "Wunschliste";
+        badges.appendChild(wish);
+      }
+      if (place.done) {
+        var doneBadge = document.createElement("span");
+        doneBadge.className = "badge badge-done";
+        doneBadge.textContent = "Done";
+        badges.appendChild(doneBadge);
+      }
+
+      top.appendChild(title);
+      top.appendChild(badges);
+      card.appendChild(top);
+
+      if (place.when) {
+        var when = document.createElement("p");
+        when.className = "card-when";
+        when.textContent = place.when;
+        card.appendChild(when);
+      }
+
+      if (place.note) {
+        var note = document.createElement("p");
+        note.className = "card-note";
+        note.textContent = place.note;
+        card.appendChild(note);
+      }
+
+      if (place.maps) {
+        var links = document.createElement("div");
+        links.className = "card-links";
+        var a = document.createElement("a");
+        a.href = place.maps;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "Maps · Karte";
+        links.appendChild(a);
+        card.appendChild(links);
+      }
+
+      var edit = document.createElement("div");
+      edit.className = "card-edit";
+      edit.innerHTML =
+        '<form class="form-grid edit-form">' +
+        '<div class="form-row"><label>Name</label><input name="name" required maxlength="120" value="' + escapeHtml(place.name) + '"></div>' +
+        '<div class="form-row"><label>When · Wann</label><input name="when" maxlength="160" value="' + escapeHtml(place.when) + '"></div>' +
+        '<div class="form-row"><label>Note · Notiz</label><textarea name="note" maxlength="500">' + escapeHtml(place.note) + "</textarea></div>" +
+        '<div class="form-row"><label>Kind · Art</label><select name="kind">' +
+        kindOptions(place.kind) +
+        "</select></div>" +
+        '<div class="form-row"><label>Maps URL</label><input name="maps" type="url" maxlength="500" value="' + escapeHtml(place.maps) + '"></div>' +
+        '<div class="form-actions">' +
+        '<button type="submit" class="btn btn-sm">Save</button>' +
+        '<button type="button" class="btn btn-sm btn-toggle-done" data-id="' + escapeHtml(place.id) + '">' +
+        (place.done ? "Mark undone" : "Mark done") +
+        "</button>" +
+        '<button type="button" class="btn btn-sm btn-up" data-id="' + escapeHtml(place.id) + '" ' + (index === 0 ? "disabled" : "") + ">↑</button>" +
+        '<button type="button" class="btn btn-sm btn-down" data-id="' + escapeHtml(place.id) + '" ' + (index === state.places.length - 1 ? "disabled" : "") + ">↓</button>" +
+        '<button type="button" class="btn btn-sm btn-danger btn-delete" data-id="' + escapeHtml(place.id) + '">Delete</button>' +
+        "</div></form>";
+
+      card.appendChild(edit);
+      li.appendChild(node);
+      li.appendChild(card);
+      routeEl.appendChild(li);
+
+      var form = edit.querySelector(".edit-form");
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var fd = new FormData(form);
+        place.name = String(fd.get("name") || "").trim() || place.name;
+        place.when = String(fd.get("when") || "").trim();
+        place.note = String(fd.get("note") || "").trim();
+        place.kind = String(fd.get("kind") || "stay");
+        place.maps = String(fd.get("maps") || "").trim();
+        persist();
+        render();
+        toast("Stop updated");
+      });
+    });
+  }
+
+  function kindOptions(selected) {
+    return ["flight", "stay", "car", "bucket"].map(function (k) {
+      return '<option value="' + k + '"' + (k === selected ? " selected" : "") + ">" + k + "</option>";
+    }).join("");
+  }
+
+  function findIndex(id) {
+    for (var i = 0; i < state.places.length; i++) {
+      if (state.places[i].id === id) return i;
+    }
+    return -1;
+  }
+
+  function setEditing(on) {
+    state.editing = !!on;
+    document.body.classList.toggle("is-editing", state.editing);
+    btnEdit.setAttribute("aria-pressed", state.editing ? "true" : "false");
+    btnEdit.textContent = state.editing ? "Done editing" : "Edit · Bearbeiten";
+    editPanel.hidden = !state.editing;
+    editPanel.classList.toggle("is-open", state.editing);
+    if (!state.editing) {
+      state.showAdd = false;
+      addCard.style.display = "";
+      addForm.reset();
+    }
+  }
+
+  btnEdit.addEventListener("click", function () {
+    setEditing(!state.editing);
+  });
+
+  document.getElementById("btn-add").addEventListener("click", function () {
+    state.showAdd = true;
+    addCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    document.getElementById("add-name").focus();
+  });
+
+  document.getElementById("btn-cancel-add").addEventListener("click", function () {
+    addForm.reset();
+  });
+
+  addForm.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var fd = new FormData(addForm);
+    var place = normalizePlace({
+      id: uid(),
+      name: fd.get("name"),
+      when: fd.get("when"),
+      note: fd.get("note"),
+      kind: fd.get("kind"),
+      maps: fd.get("maps"),
+      done: false
+    });
+    state.places.push(place);
+    persist();
+    addForm.reset();
+    render();
+    toast("Stop added");
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", function () {
+    if (!confirm("Reset to seed from places.json? Local edits will be cleared.")) return;
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+    applyData(JSON.parse(JSON.stringify(state.seed)));
+    toast("Reset to seed");
+  });
+
+  document.getElementById("btn-download").addEventListener("click", function () {
+    var payload = {
+      trip: state.trip,
+      places: state.places
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "places.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    toast("Downloaded places.json");
+  });
+
+  routeEl.addEventListener("click", function (ev) {
+    var t = ev.target;
+    if (!(t instanceof HTMLElement)) return;
+    var id = t.getAttribute("data-id");
+    if (!id) return;
+    var idx = findIndex(id);
+    if (idx < 0) return;
+
+    if (t.classList.contains("btn-delete")) {
+      if (!confirm("Delete this stop?")) return;
+      state.places.splice(idx, 1);
+      persist();
+      render();
+      toast("Stop deleted");
+      return;
+    }
+
+    if (t.classList.contains("btn-toggle-done")) {
+      state.places[idx].done = !state.places[idx].done;
+      persist();
+      render();
+      toast(state.places[idx].done ? "Marked done" : "Marked undone");
+      return;
+    }
+
+    if (t.classList.contains("btn-up") && idx > 0) {
+      var tmp = state.places[idx - 1];
+      state.places[idx - 1] = state.places[idx];
+      state.places[idx] = tmp;
+      persist();
+      render();
+      return;
+    }
+
+    if (t.classList.contains("btn-down") && idx < state.places.length - 1) {
+      var tmp2 = state.places[idx + 1];
+      state.places[idx + 1] = state.places[idx];
+      state.places[idx] = tmp2;
+      persist();
+      render();
+    }
+  });
+
+  fetch("./places.json")
+    .then(function (r) {
+      if (!r.ok) throw new Error("Failed to load places.json");
+      return r.json();
+    })
+    .then(function (seed) {
+      state.seed = seed;
+      var saved = loadFromStorage();
+      if (saved) {
+        applyData(saved);
+        toast("Loaded saved edits");
+      } else {
+        applyData(seed);
+      }
+    })
+    .catch(function () {
+      routeEl.innerHTML = '<p class="empty">Could not load places.json</p>';
+    });
+})();
+  </script>
+</body>
+</html>
