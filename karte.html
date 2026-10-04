@@ -134,6 +134,12 @@
         link.href = "./wunschliste.html#" + encodeURIComponent(id);
         link.textContent = "Zum Eintrag";
         pop.appendChild(link);
+        var kakao = document.createElement("a");
+        kakao.href = "https://map.kakao.com/link/map/" + encodeURIComponent(name) + "," + lat + "," + lng;
+        kakao.target = "_blank";
+        kakao.rel = "noopener noreferrer";
+        kakao.textContent = "In KakaoMap öffnen";
+        pop.appendChild(kakao);
 
         var popup = new maplibregl.Popup({
           offset: 14,

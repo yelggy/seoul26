@@ -52,6 +52,7 @@
         <div class="detail-actions">
           <a id="detail-photos" href="#" target="_blank" rel="noopener noreferrer">Fotos auf Google Maps</a>
           <a id="detail-maps" href="#" target="_blank" rel="noopener noreferrer">In Google Maps öffnen</a>
+          <a id="detail-kakao" href="#" target="_blank" rel="noopener noreferrer" hidden>In KakaoMap öffnen</a>
         </div>
         <div class="detail-map" id="detail-map-wrap" hidden>
           <iframe id="detail-map" title="Karte" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -85,6 +86,7 @@
   var detailNote = document.getElementById("detail-note");
   var detailPhotos = document.getElementById("detail-photos");
   var detailMaps = document.getElementById("detail-maps");
+  var detailKakao = document.getElementById("detail-kakao");
   var detailMapWrap = document.getElementById("detail-map-wrap");
   var detailMap = document.getElementById("detail-map");
   var items = [];
@@ -112,6 +114,17 @@
 
   function safeImage(path) {
     return /^assets\/places\/[a-z0-9-]+\/[123]\.jpe?g$/i.test(path || "");
+  }
+
+  function finiteCoord(value) {
+    if (value === null || value === undefined || value === "") return NaN;
+    var n = Number(value);
+    return isFinite(n) ? n : NaN;
+  }
+
+  function kakaoMapUrl(name, lat, lng) {
+    if (!name || !isFinite(lat) || !isFinite(lng)) return "";
+    return "https://map.kakao.com/link/map/" + encodeURIComponent(name) + "," + lat + "," + lng;
   }
 
   function queryFromMaps(url) {
@@ -171,6 +184,14 @@
       detailMaps.href = maps;
     } else {
       detailMaps.hidden = true;
+    }
+    var kakao = kakaoMapUrl(item.name, item.lat, item.lng);
+    if (kakao) {
+      detailKakao.hidden = false;
+      detailKakao.href = kakao;
+    } else {
+      detailKakao.hidden = true;
+      detailKakao.removeAttribute("href");
     }
     var q = queryFromMaps(maps);
     if (q) {
@@ -284,6 +305,8 @@
           note: String(doc.note || "").trim(),
           maps: String(doc.maps || "").trim(),
           photos: String(doc.photos || "").trim(),
+          lat: finiteCoord(doc.lat),
+          lng: finiteCoord(doc.lng),
           images: images,
           from: String(doc.from || "").trim()
         };
