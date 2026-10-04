@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Seoul 26 — Night Route</title>
-  <meta name="description" content="Seoul 26 trip journal · 5–17 October 2026 · Carlo, Cyrill, Simon & Adrian.">
+  <title>Seoul 26 — Nachtroute</title>
+  <meta name="description" content="Seoul 26 · Reisetagebuch · 5.–17. Oktober 2026.">
   <meta name="theme-color" content="#0a0a0c">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Seoul 26 — Night Route">
-  <meta property="og:description" content="Trip journal · Zürich → München → Seoul · 5–17 Oct 2026.">
+  <meta property="og:title" content="Seoul 26 — Nachtroute">
+  <meta property="og:description" content="Reisetagebuch · Zürich → München → Seoul · 5.–17. Oktober 2026.">
   <meta property="og:url" content="https://yelggy.github.io/seoul26/">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Seoul 26 — Night Route">
-  <meta name="twitter:description" content="Trip journal · Zürich → München → Seoul · 5–17 Oct 2026.">
+  <meta name="twitter:title" content="Seoul 26 — Nachtroute">
+  <meta name="twitter:description" content="Reisetagebuch · Zürich → München → Seoul · 5.–17. Oktober 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -21,55 +21,54 @@
 <body>
   <main class="wrap">
     <header class="hero">
-      <p class="hero-kicker">Nachtroute · Night Route</p>
+      <p class="hero-kicker">Nachtroute</p>
       <h1>Seoul 26</h1>
-      <p class="hero-sub" id="trip-dates">5–17 October 2026</p>
-      <ul class="crew" id="crew-list" aria-label="Crew"></ul>
+      <p class="hero-sub" id="trip-dates">5.–17. Oktober 2026</p>
       <div class="toolbar">
-        <button type="button" class="btn btn-primary" id="btn-edit" aria-pressed="false">Edit · Bearbeiten</button>
-        <button type="button" class="btn btn-ghost" id="btn-download" title="Download current list as places.json">Download JSON</button>
+        <button type="button" class="btn btn-primary" id="btn-edit" aria-pressed="false">Bearbeiten</button>
+        <button type="button" class="btn btn-ghost" id="btn-download" title="Aktuelle Liste als places.json herunterladen">JSON herunterladen</button>
       </div>
       <div class="edit-panel" id="edit-panel" hidden>
-        <p>Edits stay in this browser (localStorage). Seed lives in <code>places.json</code>. Passwords, tokens, and card numbers are blocked and never saved.</p>
+        <p>Änderungen bleiben in diesem Browser. Die Vorlage liegt in <code>places.json</code>. Passwörter, Tokens und Kartennummern werden blockiert und nicht gespeichert.</p>
         <div class="edit-actions">
-          <button type="button" class="btn btn-sm" id="btn-add">+ Add stop</button>
-          <button type="button" class="btn btn-sm btn-danger" id="btn-reset">Reset to seed</button>
+          <button type="button" class="btn btn-sm" id="btn-add">+ Stopp hinzufügen</button>
+          <button type="button" class="btn btn-sm btn-danger" id="btn-reset">Auf Vorlage zurücksetzen</button>
         </div>
       </div>
     </header>
 
     <div class="legend" aria-hidden="true">
-      <span><i class="dot dot-flight"></i> Flight · Flug</span>
-      <span><i class="dot dot-stay"></i> Stay · Aufenthalt</span>
-      <span><i class="dot dot-car"></i> Car · Auto</span>
-      <span><i class="dot dot-bucket"></i> Bucket · Wunschliste</span>
+      <span><i class="dot dot-flight"></i> Flug</span>
+      <span><i class="dot dot-stay"></i> Aufenthalt</span>
+      <span><i class="dot dot-car"></i> Auto</span>
+      <span><i class="dot dot-bucket"></i> Wunschliste</span>
     </div>
 
-    <ol class="route" id="route" aria-label="Route stops"></ol>
+    <ol class="route" id="route" aria-label="Routenstopps"></ol>
 
-    <section class="add-card" id="add-card" aria-label="Add stop">
+    <section class="add-card" id="add-card" aria-label="Stopp hinzufügen">
       <div class="card">
-        <h2>New stop · Neuer Stopp</h2>
+        <h2>Neuer Stopp</h2>
         <form class="form-grid" id="add-form">
           <div class="form-row">
             <label for="add-name">Name</label>
             <input id="add-name" name="name" required maxlength="120" placeholder="Place name">
           </div>
           <div class="form-row">
-            <label for="add-when">When · Wann</label>
-            <input id="add-when" name="when" maxlength="160" placeholder="e.g. Sat 10 Oct · 11:00">
+            <label for="add-when">Wann</label>
+            <input id="add-when" name="when" maxlength="160" placeholder="z. B. Sa 10. Okt. · 11:00">
           </div>
           <div class="form-row">
-            <label for="add-note">Note · Notiz</label>
-            <textarea id="add-note" name="note" maxlength="500" placeholder="Optional note"></textarea>
+            <label for="add-note">Notiz</label>
+            <textarea id="add-note" name="note" maxlength="500" placeholder="Optionale Notiz"></textarea>
           </div>
           <div class="form-row">
-            <label for="add-kind">Kind · Art</label>
+            <label for="add-kind">Art</label>
             <select id="add-kind" name="kind">
-              <option value="flight">flight</option>
-              <option value="stay">stay</option>
-              <option value="car">car</option>
-              <option value="bucket">bucket</option>
+              <option value="flight">Flug</option>
+              <option value="stay">Aufenthalt</option>
+              <option value="car">Auto</option>
+              <option value="bucket">Wunschliste</option>
             </select>
           </div>
           <div class="form-row">
@@ -77,8 +76,8 @@
             <input id="add-maps" name="maps" type="url" maxlength="500" placeholder="https://…">
           </div>
           <div class="form-actions">
-            <button type="submit" class="btn btn-sm btn-primary">Save stop</button>
-            <button type="button" class="btn btn-sm" id="btn-cancel-add">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-primary">Stopp speichern</button>
+            <button type="button" class="btn btn-sm" id="btn-cancel-add">Abbrechen</button>
           </div>
         </form>
       </div>
@@ -88,15 +87,15 @@
     <section class="bucket" id="bucket" aria-labelledby="bucket-title">
       <header class="bucket-head">
         <p class="hero-kicker">Wunschliste</p>
-        <h2 id="bucket-title">Bucket list</h2>
-        <p class="bucket-lead">Read from <code>bucket/*.json</code> in the repo. A new file shows up here after the next Pages build. Entries that look like passwords or secrets are skipped.</p>
+        <h2 id="bucket-title">Bucket List</h2>
+        <p class="bucket-lead">Eigener Bereich. Die Einträge kommen aus den Dateien <code>bucket/*.json</code> im Repository. Eine neue Datei erscheint nach dem nächsten Seiten-Build. Einträge, die wie Passwörter oder Secrets aussehen, werden übersprungen.</p>
       </header>
-      <ul class="bucket-list" id="bucket-list" aria-label="Bucket list from the repository"></ul>
+      <ul class="bucket-list" id="bucket-list" aria-label="Bucket List aus dem Repository"></ul>
     </section>
 
     <footer class="footer">
-      <p>Seoul 26 · Carlo, Cyrill, Simon, Adrian</p>
-      <p><a href="https://github.com/yelggy/seoul26" target="_blank" rel="noopener noreferrer">GitHub repo</a></p>
+      <p>Seoul 26</p>
+      <p><a href="https://github.com/yelggy/seoul26" target="_blank" rel="noopener noreferrer">GitHub-Repository</a></p>
     </footer>
   </main>
 
@@ -106,12 +105,12 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "seoul26-places-v1";
+  var STORAGE_KEY = "seoul26-places-v2";
   var KIND_LABELS = {
-    flight: "Flight",
-    stay: "Stay",
-    car: "Car",
-    bucket: "Bucket"
+    flight: "Flug",
+    stay: "Aufenthalt",
+    car: "Auto",
+    bucket: "Wunschliste"
   };
 
   var state = {
@@ -123,8 +122,7 @@
   };
 
   var routeEl = document.getElementById("route");
-  var crewEl = document.getElementById("crew-list");
-  var datesEl = document.getElementById("trip-dates");
+    var datesEl = document.getElementById("trip-dates");
   var btnEdit = document.getElementById("btn-edit");
   var editPanel = document.getElementById("edit-panel");
   var addCard = document.getElementById("add-card");
@@ -171,7 +169,7 @@
   function persist() {
     for (var i = 0; i < state.places.length; i++) {
       if (placeHasSensitive(state.places[i])) {
-        toast("Blocked: looks like a password or secret");
+        toast("Blockiert: sieht nach Passwort oder Secret aus");
         return false;
       }
     }
@@ -181,7 +179,7 @@
         places: state.places
       }));
     } catch (e) {
-      toast("Could not save locally");
+      toast("Lokal speichern nicht möglich");
       return false;
     }
     return true;
@@ -202,7 +200,7 @@
   function normalizePlace(p) {
     return {
       id: p.id || uid(),
-      name: String(p.name || "").trim() || "Untitled",
+      name: String(p.name || "").trim() || "Ohne Namen",
       when: String(p.when || "").trim(),
       note: String(p.note || "").trim(),
       kind: ["flight", "stay", "car", "bucket"].indexOf(p.kind) >= 0 ? p.kind : "stay",
@@ -214,14 +212,7 @@
   function applyData(data) {
     state.trip = data.trip || state.seed.trip;
     state.places = (data.places || []).map(normalizePlace);
-    if (state.trip.dates) datesEl.textContent = state.trip.dates;
-    crewEl.innerHTML = "";
-    (state.trip.crew || []).forEach(function (name) {
-      var li = document.createElement("li");
-      li.textContent = name.split(" ")[0];
-      li.title = name;
-      crewEl.appendChild(li);
-    });
+    if (state.trip && state.trip.dates) datesEl.textContent = state.trip.dates;
     render();
   }
 
@@ -238,7 +229,7 @@
     if (!state.places.length) {
       var empty = document.createElement("p");
       empty.className = "empty";
-      empty.textContent = "No stops yet. Turn on Edit to add one.";
+      empty.textContent = "Noch keine Stopps. Bearbeitung einschalten, um einen hinzuzufügen.";
       routeEl.appendChild(empty);
       return;
     }
@@ -308,7 +299,7 @@
         a.href = place.maps;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
-        a.textContent = "Maps · Karte";
+        a.textContent = "Karte";
         links.appendChild(a);
         card.appendChild(links);
       }
@@ -318,20 +309,20 @@
       edit.innerHTML =
         '<form class="form-grid edit-form">' +
         '<div class="form-row"><label>Name</label><input name="name" required maxlength="120" value="' + escapeHtml(place.name) + '"></div>' +
-        '<div class="form-row"><label>When · Wann</label><input name="when" maxlength="160" value="' + escapeHtml(place.when) + '"></div>' +
-        '<div class="form-row"><label>Note · Notiz</label><textarea name="note" maxlength="500">' + escapeHtml(place.note) + "</textarea></div>" +
-        '<div class="form-row"><label>Kind · Art</label><select name="kind">' +
+        '<div class="form-row"><label>Wann</label><input name="when" maxlength="160" value="' + escapeHtml(place.when) + '"></div>' +
+        '<div class="form-row"><label>Notiz</label><textarea name="note" maxlength="500">' + escapeHtml(place.note) + "</textarea></div>" +
+        '<div class="form-row"><label>Art</label><select name="kind">' +
         kindOptions(place.kind) +
         "</select></div>" +
         '<div class="form-row"><label>Maps URL</label><input name="maps" type="url" maxlength="500" value="' + escapeHtml(place.maps) + '"></div>' +
         '<div class="form-actions">' +
-        '<button type="submit" class="btn btn-sm">Save</button>' +
+        '<button type="submit" class="btn btn-sm">Speichern</button>' +
         '<button type="button" class="btn btn-sm btn-toggle-done" data-id="' + escapeHtml(place.id) + '">' +
-        (place.done ? "Mark undone" : "Mark done") +
+        (place.done ? "Als offen markieren" : "Als erledigt markieren") +
         "</button>" +
         '<button type="button" class="btn btn-sm btn-up" data-id="' + escapeHtml(place.id) + '" ' + (index === 0 ? "disabled" : "") + ">↑</button>" +
         '<button type="button" class="btn btn-sm btn-down" data-id="' + escapeHtml(place.id) + '" ' + (index === state.places.length - 1 ? "disabled" : "") + ">↓</button>" +
-        '<button type="button" class="btn btn-sm btn-danger btn-delete" data-id="' + escapeHtml(place.id) + '">Delete</button>' +
+        '<button type="button" class="btn btn-sm btn-danger btn-delete" data-id="' + escapeHtml(place.id) + '">Löschen</button>' +
         "</div></form>";
 
       card.appendChild(edit);
@@ -349,19 +340,19 @@
         place.kind = String(fd.get("kind") || "stay");
         place.maps = String(fd.get("maps") || "").trim();
         if (placeHasSensitive(place)) {
-          toast("Blocked: looks like a password or secret");
+          toast("Blockiert: sieht nach Passwort oder Secret aus");
           return;
         }
         if (!persist()) return;
         render();
-        toast("Stop updated");
+        toast("Stopp aktualisiert");
       });
     });
   }
 
   function kindOptions(selected) {
     return ["flight", "stay", "car", "bucket"].map(function (k) {
-      return '<option value="' + k + '"' + (k === selected ? " selected" : "") + ">" + k + "</option>";
+      return '<option value="' + k + '"' + (k === selected ? " selected" : "") + ">" + (KIND_LABELS[k] || k) + "</option>";
     }).join("");
   }
 
@@ -376,7 +367,7 @@
     state.editing = !!on;
     document.body.classList.toggle("is-editing", state.editing);
     btnEdit.setAttribute("aria-pressed", state.editing ? "true" : "false");
-    btnEdit.textContent = state.editing ? "Done editing" : "Edit · Bearbeiten";
+    btnEdit.textContent = state.editing ? "Fertig" : "Bearbeiten";
     editPanel.hidden = !state.editing;
     editPanel.classList.toggle("is-open", state.editing);
     if (!state.editing) {
@@ -413,7 +404,7 @@
       done: false
     });
     if (placeHasSensitive(place)) {
-      toast("Blocked: looks like a password or secret");
+      toast("Blockiert: sieht nach Passwort oder Secret aus");
       return;
     }
     state.places.push(place);
@@ -423,16 +414,16 @@
     }
     addForm.reset();
     render();
-    toast("Stop added");
+    toast("Stopp hinzugefügt");
   });
 
   document.getElementById("btn-reset").addEventListener("click", function () {
-    if (!confirm("Reset to seed from places.json? Local edits will be cleared.")) return;
+    if (!confirm("Auf Vorlage zurücksetzen from places.json? Local edits will be cleared.")) return;
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
     applyData(JSON.parse(JSON.stringify(state.seed)));
-    toast("Reset to seed");
+    toast("Auf Vorlage zurücksetzen");
   });
 
   document.getElementById("btn-download").addEventListener("click", function () {
@@ -449,7 +440,7 @@
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
-    toast("Downloaded places.json");
+    toast("places.json heruntergeladen");
   });
 
   routeEl.addEventListener("click", function (ev) {
@@ -461,11 +452,11 @@
     if (idx < 0) return;
 
     if (t.classList.contains("btn-delete")) {
-      if (!confirm("Delete this stop?")) return;
+      if (!confirm("Diesen Stopp löschen?")) return;
       state.places.splice(idx, 1);
       persist();
       render();
-      toast("Stop deleted");
+      toast("Stopp gelöscht");
       return;
     }
 
@@ -473,7 +464,7 @@
       state.places[idx].done = !state.places[idx].done;
       persist();
       render();
-      toast(state.places[idx].done ? "Marked done" : "Marked undone");
+      toast(state.places[idx].done ? "Als erledigt markiert" : "Als offen markiert");
       return;
     }
 
@@ -503,7 +494,7 @@
     if (!items.length) {
       var empty = document.createElement("li");
       empty.className = "bucket-empty";
-      empty.textContent = "No bucket files yet.";
+      empty.textContent = "Noch keine Bucket-List-Dateien.";
       bucketList.appendChild(empty);
       return;
     }
@@ -529,7 +520,7 @@
         a.href = item.maps;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
-        a.textContent = "Maps · Karte";
+        a.textContent = "Karte";
         body.appendChild(a);
       }
       li.appendChild(body);
@@ -577,10 +568,10 @@
         });
         items.sort(function (a, b) { return a.name.localeCompare(b.name); });
         renderBucket(items);
-        if (skipped) toast("Skipped " + skipped + " sensitive bucket file" + (skipped === 1 ? "" : "s"));
+        if (skipped) toast("Übersprungen: " + skipped + " sensible Bucket-Datei" + (skipped === 1 ? "" : "s"));
       })
       .catch(function () {
-        bucketList.innerHTML = '<li class="bucket-empty">Could not load bucket files from GitHub.</li>';
+        bucketList.innerHTML = '<li class="bucket-empty">Bucket-List-Dateien konnten nicht geladen werden.</li>';
       });
   }
 
@@ -599,17 +590,17 @@
         if (dirty) {
           try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
           applyData(seed);
-          toast("Cleared a saved edit that looked sensitive");
+          toast("Eine gespeicherte Änderung mit sensiblem Inhalt wurde verworfen");
         } else {
           applyData(saved);
-          toast("Loaded saved edits");
+          toast("Gespeicherte Änderungen geladen");
         }
       } else {
         applyData(seed);
       }
     })
     .catch(function () {
-      routeEl.innerHTML = '<p class="empty">Could not load places.json</p>';
+      routeEl.innerHTML = '<p class="empty">places.json konnte nicht geladen werden</p>';
     });
 })();
   </script>

@@ -1,20 +1,14 @@
 {
   "trip": {
     "name": "Seoul 26",
-    "dates": "5–17 October 2026",
-    "crew": [
-      "Carlo Berchtold",
-      "Cyrill Kilian Odermatt",
-      "Simon Weilenmann",
-      "Adrian Jenni"
-    ]
+    "dates": "5.–17. Oktober 2026"
   },
   "places": [
     {
       "id": "zrh-depart",
       "name": "Zürich (ZRH)",
-      "when": "Mon 5 Oct 2026 · 13:15",
-      "note": "Depart LH5765 (Swiss) to München.",
+      "when": "Mo 5. Okt. 2026 · 13:15",
+      "note": "Abflug LH5765 (Swiss) nach München.",
       "kind": "flight",
       "maps": "",
       "done": false
@@ -22,8 +16,8 @@
     {
       "id": "muc-connect",
       "name": "München (MUC)",
-      "when": "Mon 5 Oct · arrive 14:20 · depart 15:55",
-      "note": "Connect LH718 (Lufthansa) to Seoul.",
+      "when": "Mo 5. Okt. · Ankunft 14:20 · Abflug 15:55",
+      "note": "Umstieg LH718 (Lufthansa) nach Seoul.",
       "kind": "flight",
       "maps": "",
       "done": false
@@ -31,8 +25,8 @@
     {
       "id": "icn-arrive",
       "name": "Seoul Incheon (ICN)",
-      "when": "Tue 6 Oct 2026 · 09:55",
-      "note": "Arrive Seoul Incheon.",
+      "when": "Di 6. Okt. 2026 · 09:55",
+      "note": "Ankunft Seoul Incheon.",
       "kind": "flight",
       "maps": "",
       "done": false
@@ -40,26 +34,17 @@
     {
       "id": "seoul-stay",
       "name": "Seoul",
-      "when": "6–17 Oct 2026",
-      "note": "Base in the city; car from 10 Oct.",
+      "when": "6.–17. Okt. 2026",
+      "note": "Aufenthalt in der Stadt. Mietwagen ab 10. Oktober.",
       "kind": "stay",
       "maps": "",
       "done": false
     },
     {
-      "id": "galaxy-robot-park",
-      "name": "Galaxy Robot Park (갤럭시 로봇파크)",
-      "when": "Bucket list",
-      "note": "103 Arisu-ro 61-gil, Gangdong-gu, Seoul (서울 강동구 아리수로61길 103).",
-      "kind": "bucket",
-      "maps": "https://www.google.com/maps/search/?api=1&query=Galaxy+Robot+Park+103+Arisu-ro+61-gil+Gangdong-gu+Seoul",
-      "done": false
-    },
-    {
       "id": "downtown-car",
       "name": "Seoul Downtown",
-      "when": "Sat 10 Oct 2026 · 11:00",
-      "note": "Pick up rental Hyundai Santa Fe (DiscoverCars).",
+      "when": "Sa 10. Okt. 2026 · 11:00",
+      "note": "Mietwagen abholen: Hyundai Santa Fe (DiscoverCars).",
       "kind": "car",
       "maps": "",
       "done": false
@@ -67,8 +52,8 @@
     {
       "id": "icn-return",
       "name": "Incheon (ICN) → Zürich (ZRH)",
-      "when": "Sat 17 Oct · car drop 08:00 · KE917 depart 11:05 · ZRH 17:30",
-      "note": "Drop off car, then KE917 to Zürich.",
+      "when": "Sa 17. Okt. · Auto abgeben 08:00 · KE917 Abflug 11:05 · Zürich 17:30",
+      "note": "Auto abgeben, dann KE917 nach Zürich.",
       "kind": "flight",
       "maps": "",
       "done": false

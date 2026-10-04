@@ -748,3 +748,11 @@ body.is-editing .add-card {
   color: var(--text-muted);
   font-size: 0.9rem;
 }
+
+.bucket {
+  margin-top: 3.5rem;
+  padding: 1.5rem 1rem 0.5rem;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(251, 191, 36, 0.06), transparent 70%);
+  border-radius: var(--radius);
+}
