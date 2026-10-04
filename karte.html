@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="./assets/styles.css?v=9">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css" integrity="sha384-Nq6PQ+9vJPvw7U/VfDELyrWoGQMsy0gi6QShhaSrGzkpF5KkM40csg2leky+YMTd" crossorigin="">
+  <link rel="stylesheet" href="./assets/styles.css?v=10">
 </head>
 <body>
   <main class="wrap wrap-map">
@@ -33,16 +33,33 @@
     </footer>
   </main>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js" integrity="sha384-/L1njH4bbgNt9Uk3HwJ272N9fxJzRBQCxhtwGkZiqgl+Nxpq2ETUNZhNMNV1RgyW" crossorigin=""></script>
   <script>
 (function () {
   "use strict";
   var statusEl = document.getElementById("map-status");
-  var map = L.map("korea-map", { scrollWheelZoom: true }).setView([36.4, 127.8], 7);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
+  var map = new maplibregl.Map({
+    container: "korea-map",
+    style: "./assets/liberty-en.json",
+    center: [127.8, 36.4],
+    zoom: 7,
+    attributionControl: false,
+    dragRotate: false,
+    pitchWithRotate: false,
+    touchPitch: false
+  });
+  map.touchZoomRotate.disableRotation();
+  map.on("sourcedata", function () {
+    ["openmaptiles", "ne2_shaded"].forEach(function (id) {
+      var src = map.getSource(id);
+      if (src && src.attribution) src.attribution = "";
+    });
+  });
+  map.addControl(new maplibregl.AttributionControl({
+    compact: false,
+    customAttribution: '\u00a9 <a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> \u00a9 <a href="https://openmaptiles.org/" target="_blank" rel="noopener">OpenMapTiles</a> \u00a9 <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+  }), "bottom-right");
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
   function inKorea(lat, lng) {
     return lat >= 33 && lat <= 39.2 && lng >= 124.4 && lng <= 132.1;
@@ -52,6 +69,21 @@
     statusEl.hidden = false;
     statusEl.textContent = msg;
   }
+
+  var bounds = new maplibregl.LngLatBounds();
+  var placed = 0;
+  var fitted = false;
+
+  function maybeFit() {
+    if (!placed || fitted || !map.isStyleLoaded()) return;
+    fitted = true;
+    map.fitBounds(bounds, { padding: 28, maxZoom: 8 });
+  }
+
+  map.on("load", function () {
+    map.resize();
+    maybeFit();
+  });
 
   fetch("https://api.github.com/repos/yelggy/seoul26/contents/bucket", { headers: { Accept: "application/vnd.github+json" } })
     .then(function (r) { if (!r.ok) throw new Error("list"); return r.json(); })
@@ -65,7 +97,6 @@
       }));
     })
     .then(function (docs) {
-      var bounds = [];
       (docs || []).forEach(function (doc) {
         if (!doc || typeof doc !== "object") return;
         var lat = Number(doc.lat);
@@ -74,14 +105,20 @@
         var id = String(doc._file || "").trim();
         var from = String(doc.from || "").trim();
         if (!name || !id || !isFinite(lat) || !isFinite(lng) || !inKorea(lat, lng)) return;
-        var marker = L.marker([lat, lng]).addTo(map);
-        marker.bindTooltip(name, {
-          permanent: true,
-          direction: "right",
-          offset: [10, 0],
-          opacity: 1,
-          className: "marker-label"
-        });
+
+        var el = document.createElement("button");
+        el.type = "button";
+        el.className = "map-marker";
+        el.setAttribute("aria-label", name);
+        var dot = document.createElement("span");
+        dot.className = "map-marker-dot";
+        dot.setAttribute("aria-hidden", "true");
+        var label = document.createElement("span");
+        label.className = "map-marker-label";
+        label.textContent = name;
+        el.appendChild(dot);
+        el.appendChild(label);
+
         var pop = document.createElement("div");
         pop.className = "map-pop";
         var title = document.createElement("strong");
@@ -97,14 +134,28 @@
         link.href = "./wunschliste.html#" + encodeURIComponent(id);
         link.textContent = "Zum Eintrag";
         pop.appendChild(link);
-        marker.bindPopup(pop);
-        bounds.push([lat, lng]);
+
+        var popup = new maplibregl.Popup({
+          offset: 14,
+          closeButton: true,
+          closeOnClick: true,
+          focusAfterOpen: false,
+          maxWidth: "240px"
+        }).setDOMContent(pop);
+
+        new maplibregl.Marker({ element: el, anchor: "left", offset: [-7, 0] })
+          .setLngLat([lng, lat])
+          .setPopup(popup)
+          .addTo(map);
+
+        bounds.extend([lng, lat]);
+        placed += 1;
       });
-      if (!bounds.length) {
+      if (!placed) {
         fail("Für die Karte liegen noch keine sicheren Orte vor.");
         return;
       }
-      map.fitBounds(bounds, { padding: [28, 28], maxZoom: 8 });
+      maybeFit();
     })
     .catch(function () {
       fail("Die Karte konnte nicht geladen werden.");

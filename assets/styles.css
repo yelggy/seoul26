@@ -984,79 +984,86 @@ body.is-editing .add-card {
   overflow: hidden;
   border: 1px solid var(--border-strong);
   box-shadow: var(--shadow);
+  background: #d7d0c4;
 }
 
-.korea-map .leaflet-container {
-  width: 100%;
-  height: 100%;
-  background: #d7d0c4;
+@media (max-width: 640px) {
+  .korea-map {
+    height: min(68dvh, 640px);
+    min-height: 320px;
+  }
+
+  .map-marker-label {
+    font-size: 0.68rem;
+  }
+}
+
+.korea-map.maplibregl-map {
   font-family: var(--font);
 }
 
-.map-empty {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-top: 0.75rem;
+.korea-map .maplibregl-canvas {
+  outline: none;
 }
 
-.bucket-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0.35rem 0 0.9rem;
+.korea-map .maplibregl-ctrl-bottom-right {
+  max-width: calc(100% - 10px);
 }
 
-.bucket-filter-btn {
-  appearance: none;
-  font-family: inherit;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #d6d0c6;
-  background: #16161b;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  padding: 0.32rem 0.75rem;
-  cursor: pointer;
+.korea-map .maplibregl-ctrl-attrib.maplibregl-compact {
+  min-height: 0;
 }
 
-.bucket-filter-btn:hover {
-  color: var(--text);
-}
-
-.bucket-filter-btn.is-on {
-  color: #1c1917;
-  background: #f3ede3;
-}
-
-.bucket-filter-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.bucket-entry-top {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.bucket-from {
-  display: inline-flex;
-  align-items: center;
+.korea-map .maplibregl-ctrl-attrib {
   font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #1c1917;
-  background: #fbbf24;
-  border-radius: 999px;
-  padding: 0.12rem 0.45rem;
-  line-height: 1.2;
+  line-height: 1.35;
+  max-width: min(100%, 22rem);
+  white-space: normal;
+  background: rgba(255, 255, 255, 0.94);
 }
 
-.leaflet-tooltip.marker-label {
+.korea-map .maplibregl-ctrl-attrib-inner {
+  white-space: normal;
+}
+
+.korea-map .maplibregl-ctrl-attrib a {
+  color: #1c1917;
+}
+
+.map-marker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  line-height: 1;
+}
+
+.map-marker:focus-visible {
+  outline: 2px solid #c2410c;
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+
+.map-marker-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #c2410c;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+  flex: none;
+}
+
+.map-marker-label {
   background: #f3ede3;
   color: #1c1917;
-  border: 0;
   border-radius: 999px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   padding: 0.12rem 0.48rem;
@@ -1067,14 +1074,24 @@ body.is-editing .add-card {
   white-space: nowrap;
 }
 
-.leaflet-tooltip.marker-label::before {
-  display: none;
+.korea-map .maplibregl-popup-content {
+  font-family: var(--font);
+  color: #1c1917;
+  border-radius: 12px;
+  padding: 0.55rem 0.75rem 0.6rem;
+}
+
+.korea-map .maplibregl-popup-close-button {
+  font-size: 1.15rem;
+  color: #1c1917;
+  padding: 0.15rem 0.35rem;
 }
 
 .map-pop {
   display: grid;
   gap: 0.35rem;
   min-width: 8rem;
+  padding-right: 0.6rem;
 }
 
 .map-pop strong {
@@ -1096,3 +1113,4 @@ body.is-editing .add-card {
   font-weight: 700;
   color: #1c1917;
 }
+
