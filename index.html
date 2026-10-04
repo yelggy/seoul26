@@ -30,7 +30,7 @@
         <button type="button" class="btn btn-ghost" id="btn-download" title="Download current list as places.json">Download JSON</button>
       </div>
       <div class="edit-panel" id="edit-panel" hidden>
-        <p>Edits stay in this browser (localStorage). Seed lives in <code>places.json</code>.</p>
+        <p>Edits stay in this browser (localStorage). Seed lives in <code>places.json</code>. Passwords, tokens, and card numbers are blocked and never saved.</p>
         <div class="edit-actions">
           <button type="button" class="btn btn-sm" id="btn-add">+ Add stop</button>
           <button type="button" class="btn btn-sm btn-danger" id="btn-reset">Reset to seed</button>
@@ -126,6 +126,29 @@
     return "p-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
   }
 
+  var SECRET_PATTERNS = [
+    /\b(pass(word|wort)|kennwort|passwd|pwd)\s*[:=]/i,
+    /\b(api[_-]?key|secret[_-]?key|access[_-]?token|private[_-]?key|client[_-]?secret|authorization)\b/i,
+    /\b(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk_(live|test)_[A-Za-z0-9]{10,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,})/,
+    /-----BEGIN [A-Z0-9 ]+PRIVATE KEY-----/,
+    /\bBearer\s+[A-Za-z0-9\-._~+/]+=*/
+  ];
+
+  function looksSensitive(text) {
+    var s = String(text || "");
+    if (!s) return false;
+    for (var i = 0; i < SECRET_PATTERNS.length; i++) {
+      if (SECRET_PATTERNS[i].test(s)) return true;
+    }
+    var digits = s.replace(/\D/g, "");
+    if (digits.length >= 13 && digits.length <= 19 && /\d(?:[ -]?\d){12,18}/.test(s)) return true;
+    return false;
+  }
+
+  function placeHasSensitive(place) {
+    return looksSensitive(place.name) || looksSensitive(place.when) || looksSensitive(place.note) || looksSensitive(place.maps);
+  }
+
   function toast(msg) {
     toastEl.textContent = msg;
     toastEl.classList.add("is-show");
@@ -136,6 +159,12 @@
   }
 
   function persist() {
+    for (var i = 0; i < state.places.length; i++) {
+      if (placeHasSensitive(state.places[i])) {
+        toast("Blocked: looks like a password or secret");
+        return false;
+      }
+    }
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         trip: state.trip,
@@ -143,7 +172,9 @@
       }));
     } catch (e) {
       toast("Could not save locally");
+      return false;
     }
+    return true;
   }
 
   function loadFromStorage() {
@@ -307,7 +338,11 @@
         place.note = String(fd.get("note") || "").trim();
         place.kind = String(fd.get("kind") || "stay");
         place.maps = String(fd.get("maps") || "").trim();
-        persist();
+        if (placeHasSensitive(place)) {
+          toast("Blocked: looks like a password or secret");
+          return;
+        }
+        if (!persist()) return;
         render();
         toast("Stop updated");
       });
@@ -367,8 +402,15 @@
       maps: fd.get("maps"),
       done: false
     });
+    if (placeHasSensitive(place)) {
+      toast("Blocked: looks like a password or secret");
+      return;
+    }
     state.places.push(place);
-    persist();
+    if (!persist()) {
+      state.places.pop();
+      return;
+    }
     addForm.reset();
     render();
     toast("Stop added");
@@ -452,8 +494,15 @@
       state.seed = seed;
       var saved = loadFromStorage();
       if (saved) {
-        applyData(saved);
-        toast("Loaded saved edits");
+        var dirty = (saved.places || []).some(placeHasSensitive);
+        if (dirty) {
+          try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+          applyData(seed);
+          toast("Cleared a saved edit that looked sensitive");
+        } else {
+          applyData(saved);
+          toast("Loaded saved edits");
+        }
       } else {
         applyData(seed);
       }
