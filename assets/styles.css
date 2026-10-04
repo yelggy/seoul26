@@ -23,6 +23,7 @@
   --display: "Fraunces", "DM Sans", Georgia, serif;
   --max: 720px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --kind-transit: #fb923c;
   --kind-flight: #7dd3fc;
   --kind-stay: #a78bfa;
   --kind-bucket: #fbbf24;
@@ -310,6 +311,7 @@ body {
   display: inline-block;
 }
 
+.dot-transit { background: var(--kind-transit); }
 .dot-flight { background: var(--kind-flight); }
 .dot-stay { background: var(--kind-stay); }
 .dot-bucket { background: var(--kind-bucket); }
@@ -466,6 +468,12 @@ body {
   padding: 0.22rem 0.5rem;
   border-radius: 999px;
   border: 1px solid transparent;
+}
+
+.badge-transit {
+  background: rgba(194, 65, 12, 0.12);
+  color: #c2410c;
+  border-color: rgba(194, 65, 12, 0.2);
 }
 
 .badge-flight {

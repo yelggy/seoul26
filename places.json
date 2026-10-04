@@ -5,6 +5,15 @@
   },
   "places": [
     {
+      "id": "stans-zrh",
+      "name": "Stans → Zürich Flughafen, Bahnhof",
+      "when": "Mo 5. Okt. 2026 · 09:33–11:11 · 1 Std. 45 Min.",
+      "note": "2 Min. zu Fuss, 36 m. 09:33 Stans, Bahnhof, Haltestelle F, Bus EV3 Richtung Stansstad, Bahnhof (ohne Halt direkt). 09:41 Stansstad, Bahnhof. 1 Min. zu Fuss, 40 m. 09:44 Stansstad, Gleis 2, S4 Richtung Luzern. Ankunft Zürich Flughafen, Bahnhof 11:11.",
+      "kind": "transit",
+      "maps": "",
+      "done": false
+    },
+    {
       "id": "zrh-depart",
       "name": "Zürich (ZRH)",
       "when": "Mo 5. Okt. 2026 · 13:15",

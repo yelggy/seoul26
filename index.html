@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/styles.css?v=8">
+  <link rel="stylesheet" href="./assets/styles.css?v=9">
 </head>
 <body>
   <main class="wrap">
@@ -32,6 +32,7 @@
     </header>
 
     <div class="legend" aria-hidden="true">
+      <span><i class="dot dot-transit"></i> ÖV</span>
       <span><i class="dot dot-flight"></i> Flug</span>
       <span><i class="dot dot-stay"></i> Aufenthalt</span>
       <span><i class="dot dot-car"></i> Auto</span>
@@ -47,7 +48,7 @@
   <script>
 (function () {
   "use strict";
-  var KIND_LABELS = { flight: "Flug", stay: "Aufenthalt", car: "Auto" };
+  var KIND_LABELS = { transit: "ÖV", flight: "Flug", stay: "Aufenthalt", car: "Auto" };
   var routeEl = document.getElementById("route");
   var datesEl = document.getElementById("trip-dates");
   try {
@@ -109,7 +110,7 @@
     });
   }
 
-  fetch("./places.json?v=5")
+  fetch("./places.json?v=6")
     .then(function (r) { if (!r.ok) throw new Error("fail"); return r.json(); })
     .then(function (data) {
       if (data.trip && data.trip.dates) datesEl.textContent = data.trip.dates;
