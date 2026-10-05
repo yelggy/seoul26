@@ -24,11 +24,11 @@
     },
     {
       "id": "shanghai-layover",
-      "name": "Shanghai",
+      "name": "Shanghai · H.Z.M Hotel",
       "when": "Di 6. Okt. 15:50 – Mi 7. Okt. 11:40 · 19 Std. 50 Min.",
-      "note": "Aufenthalt zwischen Ankunft LH726 und Weiterflug OZ362.",
+      "note": "Übernachtung im H.Z.M Hotel (Shanghai Ninth People's Hospital Lujiabang Metro Station Store), No. 353 Xietu East Road, Huangpu District. Check-in Di 6. Okt. ab 14:00, Check-out Mi 7. Okt. vor 12:00. 2-Bett-Zimmer, ohne Frühstück. Tel. 021-63878788.",
       "kind": "stay",
-      "maps": "",
+      "maps": "https://www.google.com/maps/search/?api=1&query=H.Z.M%20Hotel%20353%20Xietu%20East%20Road%20Huangpu%20Shanghai",
       "done": false
     },
     {
