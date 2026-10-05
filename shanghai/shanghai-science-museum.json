@@ -1,0 +1,28 @@
+{
+  "name": "Shanghai Science and Technology Museum",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Großes Technikmuseum in Pudong (Metro Century Avenue / Science Museum). Unter anderem Roboter- und AI-Ausstellungen – Öffnungszeiten vor Ort prüfen.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Shanghai%20Science%20and%20Technology%20Museum",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Shanghai%20Science%20and%20Technology%20Museum",
+  "lat": 31.22028,
+  "lng": 121.53778,
+  "from": "",
+  "category": "Technik",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Shanghai_Science_and_Technology_Museum.jpg/960px-Shanghai_Science_and_Technology_Museum.jpg",
+      "author": "Empire Du Milieu",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Science_and_Technology_Museum.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Shanghai_-_Shanghai_Science_and_Technology_Museum_Exterior_Photo.jpg/960px-Shanghai_-_Shanghai_Science_and_Technology_Museum_Exterior_Photo.jpg",
+      "author": "Greg Peterson",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_-_Shanghai_Science_and_Technology_Museum_Exterior_Photo.jpg"
+    }
+  ]
+}

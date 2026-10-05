@@ -1,0 +1,35 @@
+{
+  "name": "Oriental Pearl Tower",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Ikone von Pudong mit Kugeln und Aussichtsplattformen. Lohnt sich vor allem für das Foto von außen und die Skyline-Kulisse am Abend.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Oriental%20Pearl%20Tower%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Oriental%20Pearl%20Tower%20Shanghai",
+  "lat": 31.23974,
+  "lng": 121.49981,
+  "from": "",
+  "category": "Aussicht",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Oriental_Pearl_Tower_in_Shanghai.jpg/960px-Oriental_Pearl_Tower_in_Shanghai.jpg",
+      "author": "Dmitry A. Mottl",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Oriental_Pearl_Tower_in_Shanghai.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Shanghai_Oriental_Pearl_Tower-20150516-RM-130617.jpg/960px-Shanghai_Oriental_Pearl_Tower-20150516-RM-130617.jpg",
+      "author": "Ermell",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Oriental_Pearl_Tower-20150516-RM-130617.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Shanghai_Oriental_Pearl_Tower-20150516-RM-180306.jpg/960px-Shanghai_Oriental_Pearl_Tower-20150516-RM-180306.jpg",
+      "author": "Ermell",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Oriental_Pearl_Tower-20150516-RM-180306.jpg"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "People's Square",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Zentraler Platz mit Metro-Knoten, Museum und Park. Praktischer Startpunkt für Nanjing Road und die Innenstadt.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=People%27s%20Square%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=People%27s%20Square%20Shanghai",
+  "lat": 31.23042,
+  "lng": 121.4737,
+  "from": "",
+  "category": "Sehenswürdigkeiten",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Parks_and_Recreation_People%27s_Square_Shanghai_2.jpg/960px-Parks_and_Recreation_People%27s_Square_Shanghai_2.jpg",
+      "author": "kallerna",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Parks_and_Recreation_People%27s_Square_Shanghai_2.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Shanghai_-_People%27s_Square_%281392451469%29.jpg/960px-Shanghai_-_People%27s_Square_%281392451469%29.jpg",
+      "author": "KimonBerlin",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_-_People%27s_Square_(1392451469).jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Peoples_Square.jpg/960px-Peoples_Square.jpg",
+      "author": "Baycrest",
+      "license": "CC BY-SA 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Peoples_Square.jpg"
+    }
+  ]
+}

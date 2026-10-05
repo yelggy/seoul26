@@ -1,0 +1,35 @@
+{
+  "name": "Lujiazui Riverside Promenade",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Uferweg auf der Pudong-Seite mit Blick zurück auf den Bund. Abends kostenlos und nah an Oriental Pearl / Shanghai Tower.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Lujiazui%20Riverside%20Promenade%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Lujiazui%20Riverside%20Promenade%20Shanghai",
+  "lat": 31.2388,
+  "lng": 121.4972,
+  "from": "",
+  "category": "Nacht",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Lujiazui_from_the_Bund_in_night_20250503.jpg/960px-Lujiazui_from_the_Bund_in_night_20250503.jpg",
+      "author": "Suicasmo",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Lujiazui_from_the_Bund_in_night_20250503.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Pudong_Shanghai_November_2017_panorama.jpg/960px-Pudong_Shanghai_November_2017_panorama.jpg",
+      "author": "King of Hearts",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Pudong_Shanghai_November_2017_panorama.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Like_the_way_these_buildings_seem_to_interlock_%2836396488956%29.jpg/960px-Like_the_way_these_buildings_seem_to_interlock_%2836396488956%29.jpg",
+      "author": "shankar s. from Dubai, united arab emirates",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Like_the_way_these_buildings_seem_to_interlock_(36396488956).jpg"
+    }
+  ]
+}

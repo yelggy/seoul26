@@ -1,0 +1,35 @@
+{
+  "name": "Nanxiang Steamed Bun Restaurant",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Klassiker für Xiaolongbao direkt am Yu-Garden-Basar. Touristisch, aber praktisch wenn ihr sowieso dort seid – Take-away-Schlangen sind kürzer.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Nanxiang%20Steamed%20Bun%20Restaurant%20Yuyuan%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Nanxiang%20Steamed%20Bun%20Restaurant%20Yuyuan%20Shanghai",
+  "lat": 31.227,
+  "lng": 121.4925,
+  "from": "",
+  "category": "Essen",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Xiaolongbao.jpg/960px-Xiaolongbao.jpg",
+      "author": "Bodhikun",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Xiaolongbao.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Nanxiang_mantou_dian_by_Matt%27s_Life.jpg",
+      "author": "Matt's Life from 南翔 (Nanxiang), 豫园 (Yuyuan Gardens), 上海 (Shanghai)",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Nanxiang_mantou_dian_by_Matt%27s_Life.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Yuyuan_Street_xiaolongbao.JPG/960px-Yuyuan_Street_xiaolongbao.JPG",
+      "author": "Drew Lietzow",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "source": "https://commons.wikimedia.org/wiki/File:Yuyuan_Street_xiaolongbao.JPG"
+    }
+  ]
+}

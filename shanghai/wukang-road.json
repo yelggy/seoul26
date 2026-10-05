@@ -1,0 +1,35 @@
+{
+  "name": "Wukang Road",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Allee in der ehemaligen französischen Konzession mit Villen und Cafés. Ruhiger Spaziergang – eher vormittags oder spätnachmittags.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Wukang%20Road%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Wukang%20Road%20Shanghai",
+  "lat": 31.2078,
+  "lng": 121.4386,
+  "from": "",
+  "category": "Viertel",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Street_View_of_Wukang_Road.JPG/960px-Street_View_of_Wukang_Road.JPG",
+      "author": "Livelikerw",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Street_View_of_Wukang_Road.JPG"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Wukang_Mansion.jpg/960px-Wukang_Mansion.jpg",
+      "author": "钉钉",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Wukang_Mansion.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Wukang_Mansion_%2820191114161507%29.jpg/960px-Wukang_Mansion_%2820191114161507%29.jpg",
+      "author": "N509FZ",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Wukang_Mansion_(20191114161507).jpg"
+    }
+  ]
+}

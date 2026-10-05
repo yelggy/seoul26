@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Korea 26 — Shanghai</title>
+  <meta name="description" content="Korea 26 · Shanghai Bucketlist · Zwischenstopp 6.–7. Oktober 2026.">
+  <meta name="theme-color" content="#0a0a0c">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Korea 26 — Shanghai">
+  <meta property="og:description" content="Shanghai Bucketlist · Zwischenstopp Di 6. – Mi 7. Okt. 2026.">
+  <meta property="og:url" content="https://yelggy.github.io/seoul26/shanghai.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Korea 26 — Shanghai">
+  <meta name="twitter:description" content="Shanghai Bucketlist · Zwischenstopp Di 6. – Mi 7. Okt. 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css" integrity="sha384-Nq6PQ+9vJPvw7U/VfDELyrWoGQMsy0gi6QShhaSrGzkpF5KkM40csg2leky+YMTd" crossorigin="">
+  <link rel="stylesheet" href="./assets/styles.css?v=12">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="hero-kicker">Shanghai</p>
+      <h1>Korea 26</h1>
+      <p class="hero-sub">Zwischenstopp · 6.–7. Oktober 2026</p>
+      <nav class="tabs" aria-label="Seiten">
+        <a href="./">Route</a>
+        <a href="./wunschliste.html">Bucketlist</a>
+        <a href="./shanghai.html" aria-current="page">Shanghai</a>
+        <a href="./karte.html">Karte</a>
+      </nav>
+    </header>
+
+    <section class="bucket" id="bucket" aria-labelledby="bucket-title">
+      <div id="bucket-list-view">
+        <header class="bucket-head">
+          <h2 id="bucket-title" tabindex="-1">Shanghai Bucketlist</h2>
+        </header>
+
+        <div class="timing-hint">
+          <strong>Ca. 20 Stunden in Shanghai</strong>
+          Ankunft Di 6. Okt. 15:50 PVG (LH726), Weiterflug Mi 7. Okt. 11:40 (OZ362) – also Nachmittag, Abend, eine Nacht und früher Morgen (zurück zum Flughafen ca. 09:00).
+          <p class="hint-note">Google-Dienste können in China ohne Roaming/VPN blockiert sein – Links vorher öffnen oder Roaming nutzen.</p>
+        </div>
+
+        <div id="shanghai-map" class="shanghai-map" role="region" aria-label="Karte Shanghai"></div>
+
+        <div class="bucket-filter" role="group" aria-label="Shanghai filtern">
+          <button type="button" class="bucket-filter-btn is-on" data-filter="all" aria-pressed="true">Alle</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Sehenswürdigkeiten" aria-pressed="false">Sehenswürdigkeiten</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Aussicht" aria-pressed="false">Aussicht</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Essen" aria-pressed="false">Essen</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Nacht" aria-pressed="false">Nacht</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Viertel" aria-pressed="false">Viertel</button>
+          <button type="button" class="bucket-filter-btn" data-filter="Technik" aria-pressed="false">Technik</button>
+        </div>
+        <ul class="bucket-entries" id="bucket-list"></ul>
+      </div>
+
+      <article class="bucket-detail" id="bucket-detail" hidden>
+        <button type="button" class="btn detail-back" id="bucket-back">Zurück</button>
+        <p class="detail-city" id="detail-cat" hidden></p>
+        <h2 id="detail-name"></h2>
+        <div class="detail-photos" id="detail-images" hidden></div>
+        <p class="detail-note" id="detail-note" hidden></p>
+        <p class="detail-reviews">Fotos und Bewertungen stehen auf Google Maps.</p>
+        <div class="detail-actions">
+          <a id="detail-photos" href="#" target="_blank" rel="noopener noreferrer">Fotos auf Google Maps</a>
+          <a id="detail-maps" href="#" target="_blank" rel="noopener noreferrer">In Google Maps öffnen</a>
+        </div>
+        <div class="detail-map" id="detail-map-wrap" hidden>
+          <iframe id="detail-map" title="Karte" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <p>Korea 26</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js" integrity="sha384-/L1njH4bbgNt9Uk3HwJ272N9fxJzRBQCxhtwGkZiqgl+Nxpq2ETUNZhNMNV1RgyW" crossorigin=""></script>
+  <script>
+(function () {
+  "use strict";
+  var listEl = document.getElementById("bucket-list");
+  var listView = document.getElementById("bucket-list-view");
+  var detailEl = document.getElementById("bucket-detail");
+  var toastEl = document.getElementById("toast");
+  var detailName = document.getElementById("detail-name");
+  var detailCat = document.getElementById("detail-cat");
+  var detailImages = document.getElementById("detail-images");
+  var detailNote = document.getElementById("detail-note");
+  var detailPhotos = document.getElementById("detail-photos");
+  var detailMaps = document.getElementById("detail-maps");
+  var detailMapWrap = document.getElementById("detail-map-wrap");
+  var detailMap = document.getElementById("detail-map");
+  var items = [];
+  var filter = "all";
+  var map = null;
+  var markers = [];
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("is-show");
+    setTimeout(function () { toastEl.classList.remove("is-show"); }, 2200);
+  }
+
+  function isHttp(url) {
+    return /^https?:\/\//i.test(url || "");
+  }
+
+  function finiteCoord(value) {
+    if (value === null || value === undefined || value === "") return NaN;
+    var n = Number(value);
+    return isFinite(n) ? n : NaN;
+  }
+
+  function inShanghai(lat, lng) {
+    return lat >= 30.7 && lat <= 31.9 && lng >= 120.8 && lng <= 122.2;
+  }
+
+  function safeWikiImage(img) {
+    if (!img || typeof img !== "object") return null;
+    var url = String(img.url || "").trim();
+    if (!/^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//i.test(url)) return null;
+    return {
+      url: url,
+      author: String(img.author || "Wikimedia Commons").trim(),
+      license: String(img.license || "").trim(),
+      licenseUrl: String(img.licenseUrl || "").trim(),
+      source: String(img.source || "").trim()
+    };
+  }
+
+  function queryFromMaps(url) {
+    try {
+      var u = new URL(url);
+      return u.searchParams.get("query") || u.searchParams.get("q") || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function hashId() {
+    return decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
+  }
+
+  function showList() {
+    detailMap.removeAttribute("src");
+    detailEl.hidden = true;
+    listView.hidden = false;
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    var title = document.getElementById("bucket-title");
+    if (title) title.focus();
+    if (map) setTimeout(function () { map.resize(); }, 50);
+  }
+
+  function showDetail(item, fromHash) {
+    detailName.textContent = item.name;
+    if (item.category) {
+      detailCat.hidden = false;
+      detailCat.textContent = item.category;
+    } else {
+      detailCat.hidden = true;
+      detailCat.textContent = "";
+    }
+    detailImages.innerHTML = "";
+    var photosOnPage = item.images || [];
+    if (photosOnPage.length) {
+      detailImages.hidden = false;
+      photosOnPage.forEach(function (photo) {
+        var fig = document.createElement("figure");
+        var img = document.createElement("img");
+        img.src = photo.url;
+        img.alt = item.name;
+        img.loading = "lazy";
+        fig.appendChild(img);
+        var cap = document.createElement("figcaption");
+        var credit = photo.author || "Wikimedia Commons";
+        if (photo.source) {
+          var sa = document.createElement("a");
+          sa.href = photo.source;
+          sa.target = "_blank";
+          sa.rel = "noopener noreferrer";
+          sa.textContent = credit;
+          cap.appendChild(sa);
+        } else {
+          cap.appendChild(document.createTextNode(credit));
+        }
+        if (photo.license) {
+          cap.appendChild(document.createTextNode(" · "));
+          if (photo.licenseUrl) {
+            var la = document.createElement("a");
+            la.href = photo.licenseUrl;
+            la.target = "_blank";
+            la.rel = "noopener noreferrer";
+            la.textContent = photo.license;
+            cap.appendChild(la);
+          } else {
+            cap.appendChild(document.createTextNode(photo.license));
+          }
+        }
+        fig.appendChild(cap);
+        detailImages.appendChild(fig);
+      });
+    } else {
+      detailImages.hidden = true;
+    }
+    if (item.note) {
+      detailNote.hidden = false;
+      detailNote.textContent = item.note;
+    } else {
+      detailNote.hidden = true;
+      detailNote.textContent = "";
+    }
+    var photos = isHttp(item.photos) ? item.photos : (isHttp(item.maps) ? item.maps : "");
+    var maps = isHttp(item.maps) ? item.maps : photos;
+    if (photos) {
+      detailPhotos.hidden = false;
+      detailPhotos.href = photos;
+    } else {
+      detailPhotos.hidden = true;
+    }
+    if (maps) {
+      detailMaps.hidden = false;
+      detailMaps.href = maps;
+    } else {
+      detailMaps.hidden = true;
+    }
+    var q = queryFromMaps(maps) || (item.name + " Shanghai");
+    if (q) {
+      detailMapWrap.hidden = false;
+      detailMap.src = "https://maps.google.com/maps?q=" + encodeURIComponent(q) + "&output=embed";
+    } else {
+      detailMapWrap.hidden = true;
+      detailMap.removeAttribute("src");
+    }
+    listView.hidden = true;
+    detailEl.hidden = false;
+    if (!fromHash && hashId() !== item.id) {
+      history.replaceState(null, "", "#" + encodeURIComponent(item.id));
+    }
+    detailName.focus();
+    window.scrollTo(0, 0);
+  }
+
+  function openFromHash() {
+    var id = hashId();
+    if (!id) return;
+    var found = null;
+    items.forEach(function (item) { if (item.id === id) found = item; });
+    if (found) showDetail(found, true);
+  }
+
+  function visibleItems(list) {
+    if (filter === "all") return list.slice();
+    return list.filter(function (item) { return item.category === filter; });
+  }
+
+  function renderBucket(list) {
+    listEl.innerHTML = "";
+    var shown = visibleItems(list);
+    if (!shown.length) {
+      var empty = document.createElement("li");
+      empty.className = "bucket-empty";
+      empty.textContent = filter === "all"
+        ? "Noch keine Orte in der Liste."
+        : "Keine Orte unter " + filter + ".";
+      listEl.appendChild(empty);
+      return;
+    }
+    shown.sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
+    shown.forEach(function (item) {
+      var li = document.createElement("li");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "bucket-entry" + (item.images && item.images[0] ? " has-thumb" : "");
+      if (item.images && item.images[0]) {
+        var thumb = document.createElement("img");
+        thumb.className = "bucket-entry-thumb";
+        thumb.src = item.images[0].url;
+        thumb.alt = "";
+        thumb.loading = "lazy";
+        btn.appendChild(thumb);
+      }
+      var body = document.createElement("span");
+      body.className = "bucket-entry-body";
+      var top = document.createElement("span");
+      top.className = "bucket-entry-top";
+      var name = document.createElement("span");
+      name.className = "bucket-entry-name";
+      name.textContent = item.name;
+      top.appendChild(name);
+      body.appendChild(top);
+      if (item.category) {
+        var cat = document.createElement("span");
+        cat.className = "bucket-cat";
+        cat.textContent = item.category;
+        body.appendChild(cat);
+      }
+      if (item.note) {
+        var note = document.createElement("span");
+        note.className = "bucket-entry-note";
+        note.textContent = item.note;
+        body.appendChild(note);
+      }
+      btn.appendChild(body);
+      btn.addEventListener("click", function () { showDetail(item, false); });
+      li.appendChild(btn);
+      listEl.appendChild(li);
+    });
+  }
+
+  function initMap(list) {
+    map = new maplibregl.Map({
+      container: "shanghai-map",
+      style: "./assets/liberty-en.json",
+      center: [121.48, 31.23],
+      zoom: 11,
+      attributionControl: false,
+      dragRotate: false,
+      pitchWithRotate: false,
+      touchPitch: false
+    });
+    map.touchZoomRotate.disableRotation();
+    map.on("sourcedata", function () {
+      ["openmaptiles", "ne2_shaded"].forEach(function (id) {
+        var src = map.getSource(id);
+        if (src && src.attribution) src.attribution = "";
+      });
+    });
+    map.addControl(new maplibregl.AttributionControl({
+      compact: false,
+      customAttribution: '\u00a9 <a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> \u00a9 <a href="https://openmaptiles.org/" target="_blank" rel="noopener">OpenMapTiles</a> \u00a9 <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+    }), "bottom-right");
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+
+    var bounds = new maplibregl.LngLatBounds();
+    var placed = 0;
+    list.forEach(function (item) {
+      if (!inShanghai(item.lat, item.lng)) return;
+      var el = document.createElement("button");
+      el.type = "button";
+      el.className = "map-marker";
+      el.setAttribute("aria-label", item.name);
+      var dot = document.createElement("span");
+      dot.className = "map-marker-dot";
+      dot.setAttribute("aria-hidden", "true");
+      var label = document.createElement("span");
+      label.className = "map-marker-label";
+      label.textContent = item.name;
+      el.appendChild(dot);
+      el.appendChild(label);
+
+      var pop = document.createElement("div");
+      pop.className = "map-pop";
+      var title = document.createElement("strong");
+      title.textContent = item.name;
+      pop.appendChild(title);
+      if (item.category) {
+        var tag = document.createElement("span");
+        tag.className = "map-pop-from";
+        tag.textContent = item.category;
+        pop.appendChild(tag);
+      }
+      var link = document.createElement("a");
+      link.href = "#" + encodeURIComponent(item.id);
+      link.textContent = "Zum Eintrag";
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        showDetail(item, false);
+      });
+      pop.appendChild(link);
+      var gmaps = document.createElement("a");
+      gmaps.href = item.maps;
+      gmaps.target = "_blank";
+      gmaps.rel = "noopener noreferrer";
+      gmaps.textContent = "In Google Maps öffnen";
+      pop.appendChild(gmaps);
+
+      var popup = new maplibregl.Popup({
+        offset: 14,
+        closeButton: true,
+        closeOnClick: true,
+        focusAfterOpen: false,
+        maxWidth: "240px"
+      }).setDOMContent(pop);
+
+      var marker = new maplibregl.Marker({ element: el, anchor: "left", offset: [-7, 0] })
+        .setLngLat([item.lng, item.lat])
+        .setPopup(popup)
+        .addTo(map);
+      markers.push(marker);
+      bounds.extend([item.lng, item.lat]);
+      placed += 1;
+    });
+    map.on("load", function () {
+      map.resize();
+      if (placed) map.fitBounds(bounds, { padding: 36, maxZoom: 12 });
+    });
+  }
+
+  document.getElementById("bucket-back").addEventListener("click", showList);
+  document.querySelectorAll(".bucket-filter-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filter = btn.getAttribute("data-filter") || "all";
+      document.querySelectorAll(".bucket-filter-btn").forEach(function (other) {
+        var on = other === btn;
+        other.classList.toggle("is-on", on);
+        other.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      renderBucket(items);
+    });
+  });
+  window.addEventListener("hashchange", openFromHash);
+  detailName.tabIndex = -1;
+
+  fetch("./shanghai/manifest.json?v=1")
+    .then(function (r) { if (!r.ok) throw new Error("manifest"); return r.json(); })
+    .then(function (ids) {
+      return Promise.all((ids || []).map(function (id) {
+        return fetch("./shanghai/" + encodeURIComponent(id) + ".json?v=1")
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (doc) {
+            if (doc && typeof doc === "object") doc._file = id;
+            return doc;
+          })
+          .catch(function () { return null; });
+      }));
+    })
+    .then(function (docs) {
+      items = [];
+      (docs || []).forEach(function (doc) {
+        if (!doc || typeof doc !== "object") return;
+        var images = Array.isArray(doc.images)
+          ? doc.images.map(safeWikiImage).filter(Boolean)
+          : [];
+        var lat = finiteCoord(doc.lat);
+        var lng = finiteCoord(doc.lng);
+        var item = {
+          id: String(doc._file || "").trim(),
+          name: String(doc.name || "").trim(),
+          note: String(doc.note || "").trim(),
+          maps: String(doc.maps || "").trim(),
+          photos: String(doc.photos || "").trim(),
+          lat: lat,
+          lng: lng,
+          images: images,
+          category: String(doc.category || "").trim()
+        };
+        if (!item.name || !item.id) return;
+        if (!inShanghai(lat, lng)) return;
+        items.push(item);
+      });
+      renderBucket(items);
+      initMap(items);
+      openFromHash();
+    })
+    .catch(function () {
+      listEl.innerHTML = '<li class="bucket-empty">Die Shanghai-Liste konnte nicht geladen werden.</li>';
+      toast("Shanghai-Daten fehlen.");
+    });
+})();
+  </script>
+</body>
+</html>

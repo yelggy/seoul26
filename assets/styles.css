@@ -1228,3 +1228,119 @@ body.is-editing .add-card {
   color: #1c1917;
 }
 
+
+/* —— Shanghai —— */
+.tabs {
+  width: min(100%, 34rem);
+}
+@media (max-width: 420px) {
+  .tabs {
+    gap: 0.22rem;
+    padding: 0.24rem;
+  }
+  .tabs a {
+    padding: 0.62rem 0.28rem;
+    font-size: 0.78rem;
+  }
+}
+
+.timing-hint {
+  background: var(--paper);
+  color: var(--paper-ink);
+  border-radius: var(--radius);
+  padding: 0.95rem 1.05rem;
+  margin: 0 0 1.1rem;
+  box-shadow: var(--shadow);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.timing-hint strong {
+  font-family: var(--display);
+  font-weight: 560;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+}
+.timing-hint .hint-note {
+  color: var(--paper-muted);
+  font-size: 0.84rem;
+  margin-top: 0.45rem;
+}
+
+.bucket-entry.has-thumb {
+  grid-template-columns: 88px 1fr;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+.bucket-entry-thumb {
+  width: 88px;
+  height: 88px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--paper-soft);
+  display: block;
+}
+.bucket-entry-body {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.bucket-cat {
+  justify-self: start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--paper-muted);
+}
+
+.detail-photos figure {
+  margin: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+.detail-photos figcaption {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+.detail-photos figcaption a {
+  color: var(--accent);
+}
+
+.shanghai-map {
+  height: min(52dvh, 420px);
+  min-height: 280px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow);
+  background: #d7d0c4;
+  margin: 0.5rem 0 1.25rem;
+}
+@media (max-width: 640px) {
+  .shanghai-map {
+    height: min(48dvh, 360px);
+    min-height: 240px;
+  }
+}
+.shanghai-map.maplibregl-map { font-family: var(--font); }
+.shanghai-map .maplibregl-popup-content {
+  font-family: var(--font);
+  color: #1c1917;
+  border-radius: 12px;
+  padding: 0.55rem 0.75rem 0.6rem;
+}
+.shanghai-map .maplibregl-popup-close-button {
+  font-size: 1.15rem;
+  color: #1c1917;
+  padding: 0.15rem 0.35rem;
+}
+.shanghai-map .maplibregl-ctrl-attrib {
+  font-size: 0.68rem;
+  line-height: 1.35;
+  max-width: min(100%, 22rem);
+  white-space: normal;
+  background: rgba(255, 255, 255, 0.94);
+}
+.shanghai-map .maplibregl-ctrl-attrib a { color: #1c1917; }

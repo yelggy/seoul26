@@ -1,0 +1,35 @@
+{
+  "name": "Jing'an Temple",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Goldener Tempel an der Nanjing West Road, umgeben von Hochhäusern. Kurzbesuch lohnt – danach Starbucks Reserve oder Jing'an-Viertel.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Jing%27an%20Temple%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Jing%27an%20Temple%20Shanghai",
+  "lat": 31.2234,
+  "lng": 121.4456,
+  "from": "",
+  "category": "Sehenswürdigkeiten",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Jing%27an_Temple.jpg/960px-Jing%27an_Temple.jpg",
+      "author": "Drew Lietzow",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Jing%27an_Temple.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Jing%27an_Temple_Shanghai_6.jpg/960px-Jing%27an_Temple_Shanghai_6.jpg",
+      "author": "kallerna",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Jing%27an_Temple_Shanghai_6.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Jing%27an_Temple_Shanghai_3.jpg/960px-Jing%27an_Temple_Shanghai_3.jpg",
+      "author": "kallerna",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Jing%27an_Temple_Shanghai_3.jpg"
+    }
+  ]
+}

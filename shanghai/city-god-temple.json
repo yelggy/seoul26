@@ -1,0 +1,35 @@
+{
+  "name": "City God Temple",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Taoistischer Tempel mitten im Altstadtviertel, wenige Schritte vom Yu Garden. Kurz und gut zwischen Basar und Garten.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=City%20God%20Temple%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=City%20God%20Temple%20Shanghai",
+  "lat": 31.22585,
+  "lng": 121.4924,
+  "from": "",
+  "category": "Sehenswürdigkeiten",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/2024-Apr_Shanghai_City_God_Temple_%E4%B8%8A%E6%B5%B7%E5%9F%8E%E9%9A%8D%E5%BB%9F_-_img_01.jpg/960px-2024-Apr_Shanghai_City_God_Temple_%E4%B8%8A%E6%B5%B7%E5%9F%8E%E9%9A%8D%E5%BB%9F_-_img_01.jpg",
+      "author": "Chainwit.",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:2024-Apr_Shanghai_City_God_Temple_%E4%B8%8A%E6%B5%B7%E5%9F%8E%E9%9A%8D%E5%BB%9F_-_img_01.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/20090510_Shanghai_City_God_Temple_6514.jpg/960px-20090510_Shanghai_City_God_Temple_6514.jpg",
+      "author": "Jakub Hałun",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:20090510_Shanghai_City_God_Temple_6514.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/City_God_Temple_of_Shanghai_21449-Shanghai_%2832666145040%29.jpg/960px-City_God_Temple_of_Shanghai_21449-Shanghai_%2832666145040%29.jpg",
+      "author": "xiquinhosilva",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:City_God_Temple_of_Shanghai_21449-Shanghai_(32666145040).jpg"
+    }
+  ]
+}

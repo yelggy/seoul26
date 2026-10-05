@@ -1,0 +1,35 @@
+{
+  "name": "Xintiandi",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Aufgearbeitete Shikumen-Gassen mit Restaurants und Bars. Gute Abendoption nahe der Metro South Huangpi Road.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Xintiandi%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Xintiandi%20Shanghai",
+  "lat": 31.2208,
+  "lng": 121.4748,
+  "from": "",
+  "category": "Viertel",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Xintiandi_gem.jpg",
+      "author": "The original uploader was JakeLM at English Wikipedia.",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Xintiandi_gem.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Fountain_with_Sculptures_in_Xintiandi_Shanghai_20210329.jpg/960px-Fountain_with_Sculptures_in_Xintiandi_Shanghai_20210329.jpg",
+      "author": "Leynadmar",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Fountain_with_Sculptures_in_Xintiandi_Shanghai_20210329.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Flickr_-_Tokuriki_-_Shanghai_Xin_Tian_Di_%289%29.jpg/960px-Flickr_-_Tokuriki_-_Shanghai_Xin_Tian_Di_%289%29.jpg",
+      "author": "Motohiko Tokuriki",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_Tokuriki_-_Shanghai_Xin_Tian_Di_(9).jpg"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Yu Garden (Yuyuan)",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Klassischer Ming-Garten mit Pavillons und Teichen, direkt am Basar. Am besten früh oder spät am Tag – mittags oft sehr voll.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Yu%20Garden%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Yu%20Garden%20Shanghai",
+  "lat": 31.22735,
+  "lng": 121.49215,
+  "from": "",
+  "category": "Sehenswürdigkeiten",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Yuyuan_Gardens_-_concrete_bird_design.JPG/960px-Yuyuan_Gardens_-_concrete_bird_design.JPG",
+      "author": "Me (w:User:pfctdayelise)",
+      "license": "CC BY-SA 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Yuyuan_Gardens_-_concrete_bird_design.JPG"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Shanghai_-_Yu_Garden_-_0035.jpg/960px-Shanghai_-_Yu_Garden_-_0035.jpg",
+      "author": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_-_Yu_Garden_-_0035.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Shanghai_-_Yu_Garden_-_0034.jpg/960px-Shanghai_-_Yu_Garden_-_0034.jpg",
+      "author": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_-_Yu_Garden_-_0034.jpg"
+    }
+  ]
+}

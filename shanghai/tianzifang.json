@@ -1,0 +1,35 @@
+{
+  "name": "Tianzifang",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Enge Gassen mit Shops, Galerien und Cafés in alten Shikumen-Häusern. Ideal zum Spazieren – abends gemütlich, tagsüber fotogen.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Tianzifang%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Tianzifang%20Shanghai",
+  "lat": 31.21055,
+  "lng": 121.4664,
+  "from": "",
+  "category": "Viertel",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Tianzi_fang_-_panoramio.jpg/960px-Tianzi_fang_-_panoramio.jpg",
+      "author": "rosa121821",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Tianzi_fang_-_panoramio.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Tianzifang%2C_Shanghai.jpg/960px-Tianzifang%2C_Shanghai.jpg",
+      "author": "钉钉",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Tianzifang,_Shanghai.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Tianzifang%2C_Taikang_Road%2C_French_Concession%2C_Shanghai%2C_China_%289740421860%29.jpg/960px-Tianzifang%2C_Taikang_Road%2C_French_Concession%2C_Shanghai%2C_China_%289740421860%29.jpg",
+      "author": "Fabio Achilli from Milano, Italy",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Tianzifang,_Taikang_Road,_French_Concession,_Shanghai,_China_(9740421860).jpg"
+    }
+  ]
+}

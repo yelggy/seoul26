@@ -1,0 +1,35 @@
+{
+  "name": "Shanghai Maglev",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Schnellster kommerzieller Zug der Welt (PVG ↔ Longyang Road, ca. 8 Min.). Praktisch bei der Ankunft – Richtung Flughafen am Abflugtag Zeitpuffer einplanen.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Shanghai%20Maglev%20Longyang%20Road%20Station",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Shanghai%20Maglev%20Longyang%20Road%20Station",
+  "lat": 31.20315,
+  "lng": 121.55686,
+  "from": "",
+  "category": "Technik",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Maglev_june2005.jpg",
+      "author": "User JakeLM on en.wikipedia",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Maglev_june2005.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Shanghai_Maglev_2.jpg/960px-Shanghai_Maglev_2.jpg",
+      "author": "kallerna",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Maglev_2.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Shanghai_Transrapid_002.jpg",
+      "author": "No machine-readable author provided. Yosemite~commonswiki assumed (based on copyright clai",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Transrapid_002.jpg"
+    }
+  ]
+}

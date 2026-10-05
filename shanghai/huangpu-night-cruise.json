@@ -1,0 +1,35 @@
+{
+  "name": "Huangpu River Night Cruise",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Nachtfahrt auf dem Huangpu mit Bund und Lujiazui illuminiert. Abfahrt z. B. Shiliupu oder Oriental Pearl – Tickets am Pier oder online.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Huangpu%20River%20Cruise%20Shiliupu%20Pier%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Huangpu%20River%20Cruise%20Shiliupu%20Pier%20Shanghai",
+  "lat": 31.2309,
+  "lng": 121.4955,
+  "from": "",
+  "category": "Nacht",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Shanghai_Bund_at_night_20260417_%284%29.jpg/960px-Shanghai_Bund_at_night_20260417_%284%29.jpg",
+      "author": "DvTor8303",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Bund_at_night_20260417_(4).jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/THE_BUND_AT_NIGHT_SHANGHAI_CHINA_OCT_2012_%288182044043%29.jpg/960px-THE_BUND_AT_NIGHT_SHANGHAI_CHINA_OCT_2012_%288182044043%29.jpg",
+      "author": "calflier001",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:THE_BUND_AT_NIGHT_SHANGHAI_CHINA_OCT_2012_(8182044043).jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Huangpu_River_Boat_%2838852714630%29.jpg/960px-Huangpu_River_Boat_%2838852714630%29.jpg",
+      "author": "David Stanley from Nanaimo, Canada",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Huangpu_River_Boat_(38852714630).jpg"
+    }
+  ]
+}

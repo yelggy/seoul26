@@ -1,0 +1,35 @@
+{
+  "name": "Shanghai Tower",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Höchster Aussichtspunkt der Stadt in Lujiazui. Tickets vorab buchen; bei klarem Wetter Blick bis zum Bund und darüber hinaus.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Shanghai%20Tower%20Lujiazui%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Shanghai%20Tower%20Lujiazui%20Shanghai",
+  "lat": 31.23359,
+  "lng": 121.50551,
+  "from": "",
+  "category": "Aussicht",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Shanghai_-_Shanghai_Tower_-_0001.jpg/960px-Shanghai_-_Shanghai_Tower_-_0001.jpg",
+      "author": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_-_Shanghai_Tower_-_0001.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Shanghai_Shanghai_Tower_5166304.jpg/960px-Shanghai_Shanghai_Tower_5166304.jpg",
+      "author": "Ermell",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Shanghai_Tower_5166304.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Shanghai_-_Shanghai_Tower_-_0003.jpg/960px-Shanghai_-_Shanghai_Tower_-_0003.jpg",
+      "author": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_-_Shanghai_Tower_-_0003.jpg"
+    }
+  ]
+}

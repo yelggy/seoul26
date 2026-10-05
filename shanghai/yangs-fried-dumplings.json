@@ -1,0 +1,35 @@
+{
+  "name": "Yang's Fried Dumplings",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Legendäre Shengjianbao (angebratene Teigtaschen). Filiale an der Huanghe Road nahe People's Square – früh kommen, es gibt oft Schlange.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Yang%27s%20Fried%20Dumplings%20Huanghe%20Road%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Yang%27s%20Fried%20Dumplings%20Huanghe%20Road%20Shanghai",
+  "lat": 31.2339,
+  "lng": 121.4753,
+  "from": "",
+  "category": "Essen",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Shengjian_mantou.jpg/960px-Shengjian_mantou.jpg",
+      "author": "Pauloleong2002",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shengjian_mantou.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Shengjian_Mantou_on_a_Pan.jpg/960px-Shengjian_Mantou_on_a_Pan.jpg",
+      "author": "Luca Mascaro",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shengjian_Mantou_on_a_Pan.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Shengjian_mantou_shop_by_ToastyKen_in_Shanghai.jpg/960px-Shengjian_mantou_shop_by_ToastyKen_in_Shanghai.jpg",
+      "author": "ToastyKen from Sheng jian bao shop in Shanghai",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shengjian_mantou_shop_by_ToastyKen_in_Shanghai.jpg"
+    }
+  ]
+}

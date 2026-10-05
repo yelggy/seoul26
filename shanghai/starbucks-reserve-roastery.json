@@ -1,0 +1,35 @@
+{
+  "name": "Starbucks Reserve Roastery",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Eine der größten Starbucks-Roasteries der Welt an der Nanjing West Road. Gut für Kaffee und Architektur-Fotos – nahe Jing'an Temple.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Starbucks%20Reserve%20Roastery%20Shanghai%20Nanjing%20West%20Road",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Starbucks%20Reserve%20Roastery%20Shanghai%20Nanjing%20West%20Road",
+  "lat": 31.2215,
+  "lng": 121.4508,
+  "from": "",
+  "category": "Essen",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Starbucks_Reserve_Roastery_Shanghai_04.jpg/960px-Starbucks_Reserve_Roastery_Shanghai_04.jpg",
+      "author": "Codas",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Starbucks_Reserve_Roastery_Shanghai_04.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Starbucks_Reserve_Roastery_Shanghai_03.jpg/960px-Starbucks_Reserve_Roastery_Shanghai_03.jpg",
+      "author": "Codas",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Starbucks_Reserve_Roastery_Shanghai_03.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Starbucks_Reserve_Roastery_Shanghai_01.jpg/960px-Starbucks_Reserve_Roastery_Shanghai_01.jpg",
+      "author": "Codas",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Starbucks_Reserve_Roastery_Shanghai_01.jpg"
+    }
+  ]
+}

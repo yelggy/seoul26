@@ -1,0 +1,35 @@
+{
+  "name": "The Bund (Waitan)",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Klassische Uferpromenade mit Kolonialbauten und Blick auf die Pudong-Skyline. Abends besonders stark – gut zu Fuß erreichbar vom Metro-Halt East Nanjing Road.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=The%20Bund%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=The%20Bund%20Shanghai",
+  "lat": 31.24037,
+  "lng": 121.49058,
+  "from": "",
+  "category": "Sehenswürdigkeiten",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Blue_hour_view_of_the_Bund_from_the_Shanghai_World_Financial_Center_dllu.jpg/960px-Blue_hour_view_of_the_Bund_from_the_Shanghai_World_Financial_Center_dllu.jpg",
+      "author": "Dllu",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Blue_hour_view_of_the_Bund_from_the_Shanghai_World_Financial_Center_dllu.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Shanghai_Bund-20150516-RM-173803.jpg/960px-Shanghai_Bund-20150516-RM-173803.jpg",
+      "author": "Ermell",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Shanghai_Bund-20150516-RM-173803.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Pudong_Shanghai_November_2017_panorama.jpg/960px-Pudong_Shanghai_November_2017_panorama.jpg",
+      "author": "King of Hearts",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Pudong_Shanghai_November_2017_panorama.jpg"
+    }
+  ]
+}

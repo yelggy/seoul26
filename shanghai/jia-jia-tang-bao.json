@@ -1,0 +1,28 @@
+{
+  "name": "Jia Jia Tang Bao",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Winziger Laden für Xiaolongbao an der Huanghe Road. Schnell, günstig und nah am People's Square – ideal vor oder nach dem Bund.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Jia%20Jia%20Tang%20Bao%20Shanghai%20Huanghe%20Road",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Jia%20Jia%20Tang%20Bao%20Shanghai%20Huanghe%20Road",
+  "lat": 31.2345,
+  "lng": 121.4788,
+  "from": "",
+  "category": "Essen",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Xiaolongbao.jpg/960px-Xiaolongbao.jpg",
+      "author": "Bodhikun",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Xiaolongbao.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Soup_dumplings.jpg",
+      "author": "K-UNIT at English Wikipedia",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Soup_dumplings.jpg"
+    }
+  ]
+}

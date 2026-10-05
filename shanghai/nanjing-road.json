@@ -1,0 +1,35 @@
+{
+  "name": "Nanjing Road Pedestrian Street",
+  "city": "Shanghai",
+  "when": "Shanghai",
+  "note": "Belebte Fußgängerzone vom People's Square zum Bund. Gut als Verbindungsweg am Abend – Läden, Snackstände, Neonlicht.",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Nanjing%20Road%20Pedestrian%20Street%20Shanghai",
+  "photos": "https://www.google.com/maps/search/?api=1&query=Nanjing%20Road%20Pedestrian%20Street%20Shanghai",
+  "lat": 31.2352,
+  "lng": 121.4788,
+  "from": "",
+  "category": "Viertel",
+  "images": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/2014.11.15.181406_Nanjing_Road_Pedestrian_Zone_Shanghai.jpg/960px-2014.11.15.181406_Nanjing_Road_Pedestrian_Zone_Shanghai.jpg",
+      "author": "Hermann Luyken",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:2014.11.15.181406_Nanjing_Road_Pedestrian_Zone_Shanghai.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/2014.11.15.181427_Nanjing_Road_Pedestrian_Zone_Shanghai.jpg/960px-2014.11.15.181427_Nanjing_Road_Pedestrian_Zone_Shanghai.jpg",
+      "author": "Hermann Luyken",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:2014.11.15.181427_Nanjing_Road_Pedestrian_Zone_Shanghai.jpg"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/East_Nanjing_Road_2020_%2850361842166%29.jpg/960px-East_Nanjing_Road_2020_%2850361842166%29.jpg",
+      "author": "Melvin Loi",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:East_Nanjing_Road_2020_(50361842166).jpg"
+    }
+  ]
+}
