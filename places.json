@@ -5,28 +5,37 @@
   },
   "places": [
     {
-      "id": "stans-zrh",
-      "name": "Stans → Zürich Flughafen, Bahnhof",
-      "when": "Mo 5. Okt. 2026 · 09:33–11:11 · 1 Std. 45 Min.",
-      "note": "2 Min. zu Fuss, 36 m. 09:33 Stans, Bahnhof, Haltestelle F, Bus EV3 Richtung Stansstad, Bahnhof (ohne Halt direkt). 09:41 Stansstad, Bahnhof. 1 Min. zu Fuss, 40 m. 09:44 Stansstad, Gleis 2, S4 Richtung Luzern. Ankunft Zürich Flughafen, Bahnhof 11:11.",
-      "kind": "transit",
-      "maps": "",
-      "done": false
-    },
-    {
-      "id": "zrh-depart",
-      "name": "Zürich (ZRH)",
-      "when": "Mo 5. Okt. 2026 · 13:15",
-      "note": "Abflug LH5765 (Swiss) nach München.",
+      "id": "muc-depart",
+      "name": "München (MUC)",
+      "when": "Mo 5. Okt. 2026 · 22:20",
+      "note": "Abflug LH726 (Lufthansa) nach Shanghai Pudong. Neue Buchung, PNR ZML9DB.",
       "kind": "flight",
       "maps": "",
       "done": false
     },
     {
-      "id": "muc-connect",
-      "name": "München (MUC)",
-      "when": "Mo 5. Okt. · Ankunft 14:20 · Abflug 15:55",
-      "note": "Umstieg LH718 (Lufthansa) nach Seoul.",
+      "id": "pvg-arrive",
+      "name": "Shanghai Pudong (PVG)",
+      "when": "Di 6. Okt. 2026 · 15:50",
+      "note": "Ankunft Shanghai Pudong.",
+      "kind": "flight",
+      "maps": "",
+      "done": false
+    },
+    {
+      "id": "shanghai-layover",
+      "name": "Shanghai",
+      "when": "Di 6. Okt. 15:50 – Mi 7. Okt. 11:40 · 19 Std. 50 Min.",
+      "note": "Aufenthalt zwischen Ankunft LH726 und Weiterflug OZ362.",
+      "kind": "stay",
+      "maps": "",
+      "done": false
+    },
+    {
+      "id": "pvg-depart",
+      "name": "Shanghai Pudong (PVG)",
+      "when": "Mi 7. Okt. 2026 · 11:40",
+      "note": "Abflug OZ362 (Asiana) nach Seoul Incheon.",
       "kind": "flight",
       "maps": "",
       "done": false
@@ -34,7 +43,7 @@
     {
       "id": "icn-arrive",
       "name": "Seoul Incheon (ICN)",
-      "when": "Di 6. Okt. 2026 · 09:55",
+      "when": "Mi 7. Okt. 2026 · 14:30",
       "note": "Ankunft Seoul Incheon.",
       "kind": "flight",
       "maps": "",
@@ -43,7 +52,7 @@
     {
       "id": "seoul-stay",
       "name": "Seoul",
-      "when": "6.–17. Okt. 2026",
+      "when": "7.–17. Okt. 2026",
       "note": "Aufenthalt in der Stadt. Mietwagen ab 10. Oktober.",
       "kind": "stay",
       "maps": "",

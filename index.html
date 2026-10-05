@@ -8,11 +8,11 @@
   <meta name="theme-color" content="#0a0a0c">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Korea 26 — Route">
-  <meta property="og:description" content="Route · Zürich → München → Seoul · 5.–17. Oktober 2026.">
+  <meta property="og:description" content="Route · München → Shanghai → Seoul · 5.–17. Oktober 2026.">
   <meta property="og:url" content="https://yelggy.github.io/seoul26/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Korea 26 — Route">
-  <meta name="twitter:description" content="Route · Zürich → München → Seoul · 5.–17. Oktober 2026.">
+  <meta name="twitter:description" content="Route · München → Shanghai → Seoul · 5.–17. Oktober 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -110,7 +110,7 @@
     });
   }
 
-  fetch("./places.json?v=6")
+  fetch("./places.json?v=7")
     .then(function (r) { if (!r.ok) throw new Error("fail"); return r.json(); })
     .then(function (data) {
       if (data.trip && data.trip.dates) datesEl.textContent = data.trip.dates;
