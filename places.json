@@ -46,7 +46,7 @@
       "when": "Mi 7. Okt. 2026 · 14:30",
       "note": "Ankunft Seoul Incheon.",
       "kind": "flight",
-      "maps": "",
+      "maps": "https://map.kakao.com/link/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
       "done": false
     },
     {
@@ -55,7 +55,7 @@
       "when": "7.–17. Okt. 2026",
       "note": "Aufenthalt in der Stadt. Mietwagen ab 10. Oktober.",
       "kind": "stay",
-      "maps": "",
+      "maps": "https://map.kakao.com/link/search/%EC%84%9C%EC%9A%B8",
       "done": false
     },
     {
@@ -73,7 +73,7 @@
       "when": "Sa 10. – Mo 12. Okt. 2026 · 2 Nächte",
       "note": "Übernachtung im Hotel AMARE, 26 Seobu-ro 1934beon-gil, Gwonseon-gu, Suwon, Gyeonggi 16405. Check-in Sa 10. Okt. ab 14:00, Check-out Mo 12. Okt. bis 12:00. Gratis Valet-Parking vor Ort (Höhenbeschränkung beachten). Tel. +82 31-2910-0682.",
       "kind": "stay",
-      "maps": "https://www.google.com/maps/search/?api=1&query=Hotel%20AMARE%2026%20Seobu-ro%201934beon-gil%20Gwonseon-gu%20Suwon",
+      "maps": "https://map.kakao.com/link/search/%EA%B2%BD%EA%B8%B0%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EA%B6%8C%EC%84%A0%EA%B5%AC%20%EC%84%9C%EB%B6%80%EB%A1%9C1934%EB%B2%88%EA%B8%B8%2026",
       "done": false
     },
     {
@@ -82,7 +82,7 @@
       "when": "Sa 17. Okt. · Auto abgeben 08:00 · KE917 Abflug 11:05 · Zürich 17:30",
       "note": "Auto abgeben, dann KE917 nach Zürich.",
       "kind": "flight",
-      "maps": "",
+      "maps": "https://map.kakao.com/link/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
       "done": false
     }
   ]
