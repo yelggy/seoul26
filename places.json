@@ -68,6 +68,15 @@
       "done": false
     },
     {
+      "id": "suwon-amare",
+      "name": "Suwon · Hotel AMARE",
+      "when": "Sa 10. – Mo 12. Okt. 2026 · 2 Nächte",
+      "note": "Übernachtung im Hotel AMARE, 26 Seobu-ro 1934beon-gil, Gwonseon-gu, Suwon, Gyeonggi 16405. Check-in Sa 10. Okt. ab 14:00, Check-out Mo 12. Okt. bis 12:00. Gratis Valet-Parking vor Ort (Höhenbeschränkung beachten). Tel. +82 31-2910-0682.",
+      "kind": "stay",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Hotel%20AMARE%2026%20Seobu-ro%201934beon-gil%20Gwonseon-gu%20Suwon",
+      "done": false
+    },
+    {
       "id": "icn-return",
       "name": "Incheon (ICN) → Zürich (ZRH)",
       "when": "Sa 17. Okt. · Auto abgeben 08:00 · KE917 Abflug 11:05 · Zürich 17:30",

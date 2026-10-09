@@ -111,7 +111,7 @@
     });
   }
 
-  fetch("./places.json?v=8")
+  fetch("./places.json?v=9")
     .then(function (r) { if (!r.ok) throw new Error("fail"); return r.json(); })
     .then(function (data) {
       if (data.trip && data.trip.dates) datesEl.textContent = data.trip.dates;
