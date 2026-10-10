@@ -52,7 +52,7 @@
     {
       "id": "seoul-stay",
       "name": "Seoul",
-      "when": "7.–17. Okt. 2026",
+      "when": "7.–10. Okt. 2026",
       "note": "Aufenthalt in der Stadt. Mietwagen ab 10. Oktober.",
       "kind": "stay",
       "maps": "https://map.kakao.com/link/search/%EC%84%9C%EC%9A%B8",
@@ -74,6 +74,15 @@
       "note": "Übernachtung im Hotel AMARE, 26 Seobu-ro 1934beon-gil, Gwonseon-gu, Suwon, Gyeonggi 16405. Check-in Sa 10. Okt. ab 14:00, Check-out Mo 12. Okt. bis 12:00. Gratis Valet-Parking vor Ort (Höhenbeschränkung beachten). Tel. +82 31-2910-0682.",
       "kind": "stay",
       "maps": "https://map.kakao.com/link/search/%EA%B2%BD%EA%B8%B0%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EA%B6%8C%EC%84%A0%EA%B5%AC%20%EC%84%9C%EB%B6%80%EB%A1%9C1934%EB%B2%88%EA%B8%B8%2026",
+      "done": false
+    },
+    {
+      "id": "busan-centum",
+      "name": "Busan · Haeundae Centum Hotel",
+      "when": "Mo 12. – Fr 16. Okt. 2026 · 4 Nächte",
+      "note": "Übernachtung im Haeundae Centum Hotel, 20 Centum 3-ro, Haeundae-gu, Busan (부산 해운대구 센텀3로 20). Check-in Mo 12. Okt. ab 15:00, Check-out Fr 16. Okt. bis 11:00. Gratis Parkplatz.",
+      "kind": "stay",
+      "maps": "https://map.kakao.com/link/search/%ED%95%B4%EC%9A%B4%EB%8C%80%EC%84%BC%ED%85%80%ED%98%B8%ED%85%94",
       "done": false
     },
     {
