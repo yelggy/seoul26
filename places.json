@@ -86,6 +86,15 @@
       "done": false
     },
     {
+      "id": "incheon-anook",
+      "name": "Incheon Guwol · Anook Signature Hotel",
+      "when": "Fr 16. – Sa 17. Okt. 2026 · 1 Nacht",
+      "note": "Übernachtung im Anook Signature Hotel, 15 Yesul-ro 204beon-gil, Namdong-gu, Incheon. Check-in Fr 16. Okt. ab 15:00, Check-out Sa 17. Okt. bis 12:00. Parkplatz vor Ort bestätigen.",
+      "kind": "stay",
+      "maps": "https://map.kakao.com/?q=15%20Yesul-ro%20204beon-gil%2C%20Namdong-gu%2C%20Incheon",
+      "done": false
+    },
+    {
       "id": "icn-return",
       "name": "Incheon (ICN) → Zürich (ZRH)",
       "when": "Sa 17. Okt. · Auto abgeben 08:00 · KE917 Abflug 11:05 · Zürich 17:30",
